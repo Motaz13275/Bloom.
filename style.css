@@ -405,3 +405,21 @@ margin-top: 9vh;
 .immg:hover .price-tag {
   transform: scale(1.1);
 }
+
+
+/* هذا للموبايل والأجهزة اللي حجم شاشتها أقل من 600 بكسل */
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 10px; /* مثال: تقليل الحواف */
+  }
+
+  .container {
+    width: 100%; /* عرض كامل */
+    padding: 10px;
+  }
+
+  /* اضبط أي عناصر ثانية حسب تصميم صفحتك */
+}
+
+
+
