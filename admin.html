@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>لوحة تحكم طلبات Bloom Store - فرز حسب الحالة</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Tajawal&display=swap");
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: #480a32;
+    color: #000000;
+    padding: 20px 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #e8e8e8;
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    user-select: none;
+  }
+
+  #searchInput {
+    width: 100%;
+    max-width: 450px;
+    padding: 12px 18px;
+    font-size: 1rem;
+    border: 2px solid #4f1355;
+    border-radius: 50px;
+    outline-offset: 2px;
+    transition: border-color 0.3s ease;
+    direction: ltr;
+    user-select: text;
+  }
+
+  #searchInput:focus {
+    border-color: #3400c2;
+    box-shadow: 0 0 8px rgba(63, 5, 155, 0.4);
+  }
+
+  .section {
+    width: 100%;
+    max-width: 1200px;
+    background: rgba(247, 247, 247, 0.912);
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgb(222, 4, 156);
+    padding: 20px 25px 30px;
+    transition: transform 0.3s ease;
+  }
+
+  .section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgb(3, 25, 6);
+  }
+
+  h2 {
+    color: #eaeaea;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    user-select: none;
+    border-bottom: 3px solid #610c672d;
+    padding-bottom: 8px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .status-info {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #c2009e;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+
+  thead tr {
+    background-color: #ab0061;
+    color: rgb(240, 240, 240);
+    font-weight: 600;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  thead th {
+    padding: 12px 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    user-select: none;
+  }
+
+  tbody tr {
+    background: #e0088a00;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(138, 5, 96, 0.947);
+    transition: background-color 0.2s ease;
+    
+  }
+
+  tbody tr:hover {
+    background-color: #d2d2d2;
+  }
+
+  tbody td {
+    padding: 14px 12px;
+    text-align: center;
+    vertical-align: middle;
+    user-select: text;
+  }
+
+  tbody td img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  select.status-select {
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1.5px solid #b0068b;
+    background-color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    min-width: 120px;
+    user-select: none;
+  }
+
+  select.status-select:hover {
+    background-color: #e9f6e9;
+    border-color: #df06b4;
+  }
+
+  button.delete-btn {
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgb(231 76 60 / 0.4);
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    user-select: none;
+    margin-left: 8px;
+  }
+
+  button.delete-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgb(192 57 43 / 0.6);
+  }
+
+  button.invoice-btn {
+    padding: 8px 16px;
+    background-color: #2980b9;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgb(41 128 185 / 0.5);
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    user-select: none;
+  }
+
+  button.invoice-btn:hover {
+    background-color: #1c5980;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgb(28 89 128 / 0.7);
+  }
+
+  .no-orders {
+    text-align: center;
+    font-size: 1rem;
+    color: #f707b3;
+    padding: 18px 10px;
+    font-style: italic;
+    user-select: none;
+  }
+
+  /* مودال الفاتورة */
+  #invoiceModal {
+    position: fixed;
+    top: 0; left: 0; right:0; bottom:0;
+    background: rgba(197, 7, 118, 0);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 15px;
+  }
+
+  #invoiceContent {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px 30px;
+    box-shadow: 0 4px 25px rgba(196, 0, 121, 0.874);
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+    user-select: none;
+    position: relative;
+  }
+
+  #invoiceContent h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #c50aa2;
+    user-select: none;
+  }
+
+  #invoiceContent img {
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 150px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  #invoiceContent p {
+    margin: 8px 0;
+    font-weight: 600;
+    color: #f3008e;
+    font-size: 1rem;
+  }
+
+  #invoiceContent span {
+    font-weight: 400;
+    color: #555;
+  }
+
+  #closeInvoiceBtn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #e74c3c;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+
+  #closeInvoiceBtn:hover {
+    background-color: #c0392b;
+  }
+
+  #printInvoiceBtn {
+    display: block;
+    margin: 25px auto 0 auto;
+    padding: 12px 25px;
+    background-color: #e30179;
+    color: rgb(230, 230, 230);
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+
+  #printInvoiceBtn:hover {
+    background-color: #c50682;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body {
+      padding: 15px 10px;
+    }
+
+    #searchInput {
+      max-width: 100%;
+      font-size: 1.1rem;
+    }
+
+    .section {
+      max-width: 100%;
+      padding: 15px 10px 25px;
+    }
+
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 10px;
+    }
+
+    thead tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+      margin-bottom: 10px;
+    }
+
+    tbody td {
+      font-size: 0.9rem;
+      padding: 12px 10px;
+    }
+
+    tbody td img {
+      width: 50px;
+      height: 50px;
+    }
+
+    select.status-select,
+    button.delete-btn,
+    button.invoice-btn {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      min-width: auto;
+    }
+
+    button.delete-btn {
+      margin-left: 6px;
+    }
+
+    /* مودال */
+    #invoiceContent {
+      width: 95%;
+      max-width: none;
+      max-height: 90vh;
+      padding: 20px 15px;
+      overflow-y: auto;
+    }
+
+    #invoiceContent p {
+      font-size: 1rem;
+    }
+
+    #printInvoiceBtn {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+
+    #closeInvoiceBtn {
+      font-size: 1.4rem;
+      padding: 8px 14px;
+      top: 10px;
+      left: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <h1>لوحة تحكم طلبات Bloom Store</h1>
+
+  <input type="search" id="searchInput" placeholder="ابحث باسم العميل أو رقم الهاتف..." autocomplete="off" spellcheck="false" />
+
+  <div class="section" id="newOrdersSection">
+    <h2>الطلبات الجديدة
+      <span class="status-info" id="newCount">عدد الطلبات: 0</span>
+      <span class="status-info" id="newSum">المبلغ الإجمالي: 0 د.أ</span>
+    </h2>
+    <table id="newOrdersTable" aria-label="جدول الطلبات الجديدة">
+      <thead>
+        <tr>
+          <th>الاسم الأول</th>
+          <th>الاسم الثاني</th>
+          <th>رقم الهاتف</th>
+          <th>البريد الإلكتروني</th>
+          <th>المقاس</th>
+          <th>صورة المنتج</th>
+          <th>تاريخ الطلب</th>
+          <th>حالة الطلب</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p class="no-orders" id="noNewOrders" style="display:none;">لا توجد طلبات جديدة.</p>
+  </div>
+
+  <div class="section" id="processingOrdersSection">
+    <h2>الطلبات قيد المعالجة
+      <span class="status-info" id="processingCount">عدد الطلبات: 0</span>
+      <span class="status-info" id="processingSum">المبلغ الإجمالي: 0 د.أ</span>
+    </h2>
+    <table id="processingOrdersTable" aria-label="جدول الطلبات قيد المعالجة">
+      <thead>
+        <tr>
+          <th>الاسم الأول</th>
+          <th>الاسم الثاني</th>
+          <th>رقم الهاتف</th>
+          <th>البريد الإلكتروني</th>
+          <th>المقاس</th>
+          <th>صورة المنتج</th>
+          <th>تاريخ الطلب</th>
+          <th>حالة الطلب</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p class="no-orders" id="noProcessingOrders" style="display:none;">لا توجد طلبات قيد المعالجة.</p>
+  </div>
+
+  <div class="section" id="deliveredOrdersSection">
+    <h2>الطلبات التي تم تسليمها
+      <span class="status-info" id="deliveredCount">عدد الطلبات: 0</span>
+      <span class="status-info" id="deliveredSum">المبلغ الإجمالي: 0 د.أ</span>
+    </h2>
+    <table id="deliveredOrdersTable" aria-label="جدول الطلبات التي تم تسليمها">
+      <thead>
+        <tr>
+          <th>الاسم الأول</th>
+          <th>الاسم الثاني</th>
+          <th>رقم الهاتف</th>
+          <th>البريد الإلكتروني</th>
+          <th>المقاس</th>
+          <th>صورة المنتج</th>
+          <th>تاريخ الطلب</th>
+          <th>حالة الطلب</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p class="no-orders" id="noDeliveredOrders" style="display:none;">لا توجد طلبات تم تسليمها.</p>
+  </div>
+
+  <!-- مودال الفاتورة -->
+  <div id="invoiceModal" role="dialog" aria-modal="true" aria-labelledby="invoiceTitle" tabindex="-1">
+    <div id="invoiceContent">
+      <button id="closeInvoiceBtn" aria-label="إغلاق الفاتورة">×</button>
+      <h3 id="invoiceTitle">فاتورة الطلب</h3>
+      <img id="invoiceImage" src="" alt="صورة المنتج" />
+      <p><strong>الاسم الأول:</strong> <span id="invoiceFname"></span></p>
+      <p><strong>الاسم الثاني:</strong> <span id="invoiceLname"></span></p>
+      <p><strong>رقم الهاتف:</strong> <span id="invoicePhone"></span></p>
+      <p><strong>البريد الإلكتروني:</strong> <span id="invoiceEmail"></span></p>
+      <p><strong>المقاس:</strong> <span id="invoiceSize"></span></p>
+      <p><strong>تاريخ الطلب:</strong> <span id="invoiceDate"></span></p>
+      <p><strong>حالة الطلب:</strong> <span id="invoiceStatus"></span></p>
+      <p><strong>السعر:</strong> <span id="invoicePrice"></span> د.أ</p>
+      <button id="printInvoiceBtn">طباعة الفاتورة</button>
+    </div>
+  </div>
+
+<script>
+  let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+  const FIXED_PRICE = 10;
+
+  const searchInput = document.getElementById('searchInput');
+
+  const tables = {
+    'جديد': document.querySelector('#newOrdersTable tbody'),
+    'قيد المعالجة': document.querySelector('#processingOrdersTable tbody'),
+    'تم التسليم': document.querySelector('#deliveredOrdersTable tbody'),
+  };
+
+  const noOrdersMessages = {
+    'جديد': document.getElementById('noNewOrders'),
+    'قيد المعالجة': document.getElementById('noProcessingOrders'),
+    'تم التسليم': document.getElementById('noDeliveredOrders'),
+  };
+
+  const countsElements = {
+    'جديد': document.getElementById('newCount'),
+    'قيد المعالجة': document.getElementById('processingCount'),
+    'تم التسليم': document.getElementById('deliveredCount'),
+  };
+
+  const sumsElements = {
+    'جديد': document.getElementById('newSum'),
+    'قيد المعالجة': document.getElementById('processingSum'),
+    'تم التسليم': document.getElementById('deliveredSum'),
+  };
+
+// مودال الفاتورة وعناصره
+const invoiceModal = document.getElementById('invoiceModal');
+const invoiceImage = document.getElementById('invoiceImage');
+const invoiceFname = document.getElementById('invoiceFname');
+const invoiceLname = document.getElementById('invoiceLname');
+const invoicePhone = document.getElementById('invoicePhone');
+const invoiceEmail = document.getElementById('invoiceEmail');
+const invoiceSize = document.getElementById('invoiceSize');
+const invoiceDate = document.getElementById('invoiceDate');
+const invoiceStatus = document.getElementById('invoiceStatus');
+const invoicePrice = document.getElementById('invoicePrice');
+const closeInvoiceBtn = document.getElementById('closeInvoiceBtn');
+const printInvoiceBtn = document.getElementById('printInvoiceBtn');
+
+function clearTables() {
+  Object.values(tables).forEach(table => table.innerHTML = '');
+}
+
+function renderOrders(filter = '') {
+  clearTables();
+
+  const searchLower = filter.trim().toLowerCase();
+
+  const filteredOrders = orders.filter(order => {
+    return (
+      order.fname.toLowerCase().includes(searchLower) ||
+      order.lname.toLowerCase().includes(searchLower) ||
+      order.phone.includes(searchLower)
+    );
+  });
+
+  const counts = { 'جديد': 0, 'قيد المعالجة': 0, 'تم التسليم': 0 };
+  const sums = { 'جديد': 0, 'قيد المعالجة': 0, 'تم التسليم': 0 };
+
+  filteredOrders.forEach((order, index) => {
+    if (!order.status) order.status = 'جديد';
+
+    counts[order.status]++;
+    const price = 10;
+
+    sums[order.status] += price;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td data-label="الاسم الأول">${order.fname}</td>
+      <td data-label="الاسم الثاني">${order.lname}</td>
+      <td data-label="رقم الهاتف">${order.phone}</td>
+      <td data-label="البريد الإلكتروني">${order.email}</td>
+      <td data-label="المقاس">${order.size}</td>
+      <td data-label="صورة المنتج"><img src="${order.imageSrc}" alt="صورة المنتج" loading="lazy" /></td>
+      <td data-label="تاريخ الطلب">${order.date}</td>
+      <td data-label="حالة الطلب">
+        <select data-index="${index}" class="status-select" aria-label="تغيير حالة الطلب">
+          <option value="جديد" ${order.status === 'جديد' ? 'selected' : ''}>جديد</option>
+          <option value="قيد المعالجة" ${order.status === 'قيد المعالجة' ? 'selected' : ''}>قيد المعالجة</option>
+          <option value="تم التسليم" ${order.status === 'تم التسليم' ? 'selected' : ''}>تم التسليم</option>
+        </select>
+      </td>
+      <td data-label="إجراءات">
+        <button class="invoice-btn" data-index="${index}" aria-label="عرض الفاتورة">فاتورة</button>
+        <button class="delete-btn" data-index="${index}" aria-label="حذف الطلب">حذف</button>
+      </td>
+    `;
+
+    tables[order.status].appendChild(tr);
+  });
+
+  // تحديث العدادات والنصوص
+  Object.keys(counts).forEach(status => {
+    countsElements[status].textContent = `عدد الطلبات: ${counts[status]}`;
+    sumsElements[status].textContent = `المبلغ الإجمالي: ${sums[status].toFixed(2)} د.أ`;
+    noOrdersMessages[status].style.display = counts[status] === 0 ? 'block' : 'none';
+  });
+
+  // إعادة ربط الأحداث بعد التحديث
+  bindEvents();
+}
+
+function bindEvents() {
+  document.querySelectorAll('.status-select').forEach(select => {
+    select.onchange = e => {
+      const idx = e.target.getAttribute('data-index');
+      orders[idx].status = e.target.value;
+      localStorage.setItem('orders', JSON.stringify(orders));
+      alert(`تم تحديث حالة الطلب إلى "${e.target.value}"`);
+      renderOrders(searchInput.value);
+    };
+  });
+
+  document.querySelectorAll('.delete-btn').forEach(button => {
+    button.onclick = e => {
+      const idx = e.target.getAttribute('data-index');
+      if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+        orders.splice(idx, 1);
+        localStorage.setItem('orders', JSON.stringify(orders));
+        renderOrders(searchInput.value);
+      }
+    };
+  });
+
+  document.querySelectorAll('.invoice-btn').forEach(button => {
+    button.onclick = e => {
+      const idx = e.target.getAttribute('data-index');
+      showInvoice(idx);
+    };
+  });
+}
+
+function showInvoice(index) {
+  const order = orders[index];
+  if (!order) return;
+
+  invoiceImage.src = order.imageSrc;
+  invoiceImage.alt = `صورة المنتج لطلب ${order.fname} ${order.lname}`;
+  invoiceFname.textContent = order.fname;
+  invoiceLname.textContent = order.lname;
+  invoicePhone.textContent = order.phone;
+  invoiceEmail.textContent = order.email;
+  invoiceSize.textContent = order.size;
+  invoiceDate.textContent = order.date;
+  invoiceStatus.textContent = order.status;
+invoicePrice.textContent = '10.00';
+
+
+  invoiceModal.style.display = 'flex';
+  invoiceModal.focus();
+}
+
+// إغلاق المودال
+closeInvoiceBtn.onclick = () => {
+  invoiceModal.style.display = 'none';
+};
+
+invoiceModal.onclick = e => {
+  if (e.target === invoiceModal) {
+    invoiceModal.style.display = 'none';
+  }
+};
+
+// طباعة الفاتورة
+printInvoiceBtn.onclick = () => {
+  const printContent = document.getElementById('invoiceContent').innerHTML;
+  const originalContent = document.body.innerHTML;
+
+  document.body.innerHTML = printContent;
+  window.print();
+  document.body.innerHTML = originalContent;
+
+  renderOrders(searchInput.value);
+};
+
+// بدء التحميل الأولي وعملية البحث
+renderOrders();
+
+searchInput.oninput = e => {
+  renderOrders(e.target.value);
+};
+
+</script>
+
+
+</body>
+</html>
