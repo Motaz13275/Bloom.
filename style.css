@@ -429,3 +429,177 @@ header {
   }
 }
 
+
+footer {
+  background: #21041b;
+  padding: 1rem 0;
+  text-align: center;
+  color: #bbb;
+  font-size: 0.9rem;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+}
+
+.social-links {
+  margin-bottom: 0.5rem;
+}
+
+.social-links a {
+  color: #ddd;
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.policy-text p {
+  margin: 0;
+  font-weight: 400;
+}
+
+
+
+/* دوران تحميل صغير داخل زر الإرسال */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+/* فوتر */
+footer {
+  background-color: #21041b;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: "Tajawal", sans-serif;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-info p {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+}
+
+.contact-info a {
+  color: #d9a5e0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #f7bfff;
+}
+
+.social-links {
+  margin: 1rem 0;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 1.8rem;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #d9a5e0;
+}
+
+.policy-links {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.policy-links a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.policy-links a:hover {
+  color: #fff;
+}
+
+/* مودال الشروط والسياسة */
+.modal.policy-modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content.policy-modal-content {
+  background: linear-gradient(to bottom right, #320a2a, #2a0628);
+  color: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: "Tajawal", sans-serif;
+  box-shadow: 0 8px 30px rgb(95 1 95 / 0.8);
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #d9a5e0;
+}
+
+
+
