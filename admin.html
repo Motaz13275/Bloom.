@@ -379,6 +379,11 @@
     }
   }
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 </head>
 <body>
 
@@ -405,8 +410,7 @@
           <th>إجراءات</th>
         </tr>
       </thead>
-      <tbody>
-      </tbody>
+      <tbody></tbody>
     </table>
     <p class="no-orders" id="noNewOrders" style="display:none;">لا توجد طلبات جديدة.</p>
   </div>
@@ -430,8 +434,7 @@
           <th>إجراءات</th>
         </tr>
       </thead>
-      <tbody>
-      </tbody>
+      <tbody></tbody>
     </table>
     <p class="no-orders" id="noProcessingOrders" style="display:none;">لا توجد طلبات قيد المعالجة.</p>
   </div>
@@ -455,8 +458,7 @@
           <th>إجراءات</th>
         </tr>
       </thead>
-      <tbody>
-      </tbody>
+      <tbody></tbody>
     </table>
     <p class="no-orders" id="noDeliveredOrders" style="display:none;">لا توجد طلبات تم تسليمها.</p>
   </div>
@@ -480,7 +482,22 @@
   </div>
 
 <script>
-  let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+  // بيانات Firebase - عدلها حسب مشروعك
+const firebaseConfig = {
+  apiKey: "AIzaSyAGrl2qkBSurSxmqywsMk-GmjpovfynL4U",
+  authDomain: "bloomadmin-ac2f8.firebaseapp.com",
+  projectId: "bloomadmin-ac2f8",
+  storageBucket: "bloomadmin-ac2f8.firebasestorage.app",
+  messagingSenderId: "242133671849",
+  appId: "1:242133671849:web:4cf8b47d7a63cdb7656eb8",
+  measurementId: "G-P29GEYBMD7"
+};
+
+// تهيئة Firebase (نسخة التوافق مع CDN)
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+  let orders = [];
+
   const FIXED_PRICE = 10;
 
   const searchInput = document.getElementById('searchInput');
@@ -509,166 +526,183 @@
     'تم التسليم': document.getElementById('deliveredSum'),
   };
 
-// مودال الفاتورة وعناصره
-const invoiceModal = document.getElementById('invoiceModal');
-const invoiceImage = document.getElementById('invoiceImage');
-const invoiceFname = document.getElementById('invoiceFname');
-const invoiceLname = document.getElementById('invoiceLname');
-const invoicePhone = document.getElementById('invoicePhone');
-const invoiceEmail = document.getElementById('invoiceEmail');
-const invoiceSize = document.getElementById('invoiceSize');
-const invoiceDate = document.getElementById('invoiceDate');
-const invoiceStatus = document.getElementById('invoiceStatus');
-const invoicePrice = document.getElementById('invoicePrice');
-const closeInvoiceBtn = document.getElementById('closeInvoiceBtn');
-const printInvoiceBtn = document.getElementById('printInvoiceBtn');
+  // مودال الفاتورة وعناصره
+  const invoiceModal = document.getElementById('invoiceModal');
+  const invoiceImage = document.getElementById('invoiceImage');
+  const invoiceFname = document.getElementById('invoiceFname');
+  const invoiceLname = document.getElementById('invoiceLname');
+  const invoicePhone = document.getElementById('invoicePhone');
+  const invoiceEmail = document.getElementById('invoiceEmail');
+  const invoiceSize = document.getElementById('invoiceSize');
+  const invoiceDate = document.getElementById('invoiceDate');
+  const invoiceStatus = document.getElementById('invoiceStatus');
+  const invoicePrice = document.getElementById('invoicePrice');
+  const closeInvoiceBtn = document.getElementById('closeInvoiceBtn');
+  const printInvoiceBtn = document.getElementById('printInvoiceBtn');
 
-function clearTables() {
-  Object.values(tables).forEach(table => table.innerHTML = '');
-}
-
-function renderOrders(filter = '') {
-  clearTables();
-
-  const searchLower = filter.trim().toLowerCase();
-
-  const filteredOrders = orders.filter(order => {
-    return (
-      order.fname.toLowerCase().includes(searchLower) ||
-      order.lname.toLowerCase().includes(searchLower) ||
-      order.phone.includes(searchLower)
-    );
-  });
-
-  const counts = { 'جديد': 0, 'قيد المعالجة': 0, 'تم التسليم': 0 };
-  const sums = { 'جديد': 0, 'قيد المعالجة': 0, 'تم التسليم': 0 };
-
-  filteredOrders.forEach((order, index) => {
-    if (!order.status) order.status = 'جديد';
-
-    counts[order.status]++;
-    const price = 10;
-
-    sums[order.status] += price;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td data-label="الاسم الأول">${order.fname}</td>
-      <td data-label="الاسم الثاني">${order.lname}</td>
-      <td data-label="رقم الهاتف">${order.phone}</td>
-      <td data-label="البريد الإلكتروني">${order.email}</td>
-      <td data-label="المقاس">${order.size}</td>
-      <td data-label="صورة المنتج"><img src="${order.imageSrc}" alt="صورة المنتج" loading="lazy" /></td>
-      <td data-label="تاريخ الطلب">${order.date}</td>
-      <td data-label="حالة الطلب">
-        <select data-index="${index}" class="status-select" aria-label="تغيير حالة الطلب">
-          <option value="جديد" ${order.status === 'جديد' ? 'selected' : ''}>جديد</option>
-          <option value="قيد المعالجة" ${order.status === 'قيد المعالجة' ? 'selected' : ''}>قيد المعالجة</option>
-          <option value="تم التسليم" ${order.status === 'تم التسليم' ? 'selected' : ''}>تم التسليم</option>
-        </select>
-      </td>
-      <td data-label="إجراءات">
-        <button class="invoice-btn" data-index="${index}" aria-label="عرض الفاتورة">فاتورة</button>
-        <button class="delete-btn" data-index="${index}" aria-label="حذف الطلب">حذف</button>
-      </td>
-    `;
-
-    tables[order.status].appendChild(tr);
-  });
-
-  // تحديث العدادات والنصوص
-  Object.keys(counts).forEach(status => {
-    countsElements[status].textContent = `عدد الطلبات: ${counts[status]}`;
-    sumsElements[status].textContent = `المبلغ الإجمالي: ${sums[status].toFixed(2)} د.أ`;
-    noOrdersMessages[status].style.display = counts[status] === 0 ? 'block' : 'none';
-  });
-
-  // إعادة ربط الأحداث بعد التحديث
-  bindEvents();
-}
-
-function bindEvents() {
-  document.querySelectorAll('.status-select').forEach(select => {
-    select.onchange = e => {
-      const idx = e.target.getAttribute('data-index');
-      orders[idx].status = e.target.value;
-      localStorage.setItem('orders', JSON.stringify(orders));
-      alert(`تم تحديث حالة الطلب إلى "${e.target.value}"`);
-      renderOrders(searchInput.value);
-    };
-  });
-
-  document.querySelectorAll('.delete-btn').forEach(button => {
-    button.onclick = e => {
-      const idx = e.target.getAttribute('data-index');
-      if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-        orders.splice(idx, 1);
-        localStorage.setItem('orders', JSON.stringify(orders));
+  function fetchOrders() {
+    db.collection('orders').get()
+      .then(snapshot => {
+        orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         renderOrders(searchInput.value);
-      }
-    };
-  });
-
-  document.querySelectorAll('.invoice-btn').forEach(button => {
-    button.onclick = e => {
-      const idx = e.target.getAttribute('data-index');
-      showInvoice(idx);
-    };
-  });
-}
-
-function showInvoice(index) {
-  const order = orders[index];
-  if (!order) return;
-
-  invoiceImage.src = order.imageSrc;
-  invoiceImage.alt = `صورة المنتج لطلب ${order.fname} ${order.lname}`;
-  invoiceFname.textContent = order.fname;
-  invoiceLname.textContent = order.lname;
-  invoicePhone.textContent = order.phone;
-  invoiceEmail.textContent = order.email;
-  invoiceSize.textContent = order.size;
-  invoiceDate.textContent = order.date;
-  invoiceStatus.textContent = order.status;
-invoicePrice.textContent = '10.00';
-
-
-  invoiceModal.style.display = 'flex';
-  invoiceModal.focus();
-}
-
-// إغلاق المودال
-closeInvoiceBtn.onclick = () => {
-  invoiceModal.style.display = 'none';
-};
-
-invoiceModal.onclick = e => {
-  if (e.target === invoiceModal) {
-    invoiceModal.style.display = 'none';
+      })
+      .catch(err => {
+        alert('فشل تحميل الطلبات: ' + err.message);
+      });
   }
-};
 
-// طباعة الفاتورة
-printInvoiceBtn.onclick = () => {
-  const printContent = document.getElementById('invoiceContent').innerHTML;
-  const originalContent = document.body.innerHTML;
+  function clearTables() {
+    Object.values(tables).forEach(table => table.innerHTML = '');
+  }
 
-  document.body.innerHTML = printContent;
-  window.print();
-  document.body.innerHTML = originalContent;
+  function renderOrders(filter = '') {
+    clearTables();
 
-  renderOrders(searchInput.value);
-};
+    const searchLower = filter.trim().toLowerCase();
 
-// بدء التحميل الأولي وعملية البحث
-renderOrders();
+    const filteredOrders = orders.filter(order => {
+      return (
+        (order.fname && order.fname.toLowerCase().includes(searchLower)) ||
+        (order.lname && order.lname.toLowerCase().includes(searchLower)) ||
+        (order.phone && order.phone.includes(searchLower))
+      );
+    });
 
-searchInput.oninput = e => {
-  renderOrders(e.target.value);
-};
+    const counts = { 'جديد': 0, 'قيد المعالجة': 0, 'تم التسليم': 0 };
+    const sums = { 'جديد': 0, 'قيد المعالجة': 0, 'تم التسليم': 0 };
 
+    filteredOrders.forEach((order, index) => {
+      if (!order.status) order.status = 'جديد';
+
+      counts[order.status]++;
+      sums[order.status] += FIXED_PRICE;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td data-label="الاسم الأول">${order.fname || ''}</td>
+        <td data-label="الاسم الثاني">${order.lname || ''}</td>
+        <td data-label="رقم الهاتف">${order.phone || ''}</td>
+        <td data-label="البريد الإلكتروني">${order.email || ''}</td>
+        <td data-label="المقاس">${order.size || ''}</td>
+        <td data-label="صورة المنتج"><img src="${order.imageSrc || ''}" alt="صورة المنتج" loading="lazy" /></td>
+        <td data-label="تاريخ الطلب">${order.date || ''}</td>
+        <td data-label="حالة الطلب">
+          <select data-index="${index}" class="status-select" aria-label="تغيير حالة الطلب">
+            <option value="جديد" ${order.status === 'جديد' ? 'selected' : ''}>جديد</option>
+            <option value="قيد المعالجة" ${order.status === 'قيد المعالجة' ? 'selected' : ''}>قيد المعالجة</option>
+            <option value="تم التسليم" ${order.status === 'تم التسليم' ? 'selected' : ''}>تم التسليم</option>
+          </select>
+        </td>
+        <td data-label="إجراءات">
+          <button class="invoice-btn" data-index="${index}" aria-label="عرض الفاتورة">فاتورة</button>
+          <button class="delete-btn" data-index="${index}" aria-label="حذف الطلب">حذف</button>
+        </td>
+      `;
+
+      tables[order.status].appendChild(tr);
+    });
+
+    Object.keys(counts).forEach(status => {
+      countsElements[status].textContent = `عدد الطلبات: ${counts[status]}`;
+      sumsElements[status].textContent = `المبلغ الإجمالي: ${sums[status].toFixed(2)} د.أ`;
+      noOrdersMessages[status].style.display = counts[status] === 0 ? 'block' : 'none';
+    });
+
+    bindEvents();
+  }
+
+  function bindEvents() {
+    document.querySelectorAll('.status-select').forEach(select => {
+      select.onchange = e => {
+        const idx = e.target.getAttribute('data-index');
+        const newStatus = e.target.value;
+        const orderId = orders[idx].id;
+
+        db.collection('orders').doc(orderId).update({ status: newStatus })
+          .then(() => {
+            orders[idx].status = newStatus;
+            alert(`تم تحديث حالة الطلب إلى "${newStatus}"`);
+            renderOrders(searchInput.value);
+          })
+          .catch(err => {
+            alert('فشل تحديث حالة الطلب: ' + err.message);
+            e.target.value = orders[idx].status;
+          });
+      };
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(button => {
+      button.onclick = e => {
+        const idx = e.target.getAttribute('data-index');
+        if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+          const orderId = orders[idx].id;
+          db.collection('orders').doc(orderId).delete()
+            .then(() => {
+              orders.splice(idx, 1);
+              alert('تم حذف الطلب بنجاح');
+              renderOrders(searchInput.value);
+            })
+            .catch(err => {
+              alert('فشل حذف الطلب: ' + err.message);
+            });
+        }
+      };
+    });
+
+    document.querySelectorAll('.invoice-btn').forEach(button => {
+      button.onclick = e => {
+        const idx = e.target.getAttribute('data-index');
+        showInvoice(idx);
+      };
+    });
+  }
+
+  function showInvoice(index) {
+    const order = orders[index];
+    if (!order) return;
+
+    invoiceImage.src = order.imageSrc || '';
+    invoiceImage.alt = `صورة المنتج لطلب ${order.fname || ''} ${order.lname || ''}`;
+    invoiceFname.textContent = order.fname || '';
+    invoiceLname.textContent = order.lname || '';
+    invoicePhone.textContent = order.phone || '';
+    invoiceEmail.textContent = order.email || '';
+    invoiceSize.textContent = order.size || '';
+    invoiceDate.textContent = order.date || '';
+    invoiceStatus.textContent = order.status || '';
+    invoicePrice.textContent = FIXED_PRICE.toFixed(2);
+
+    invoiceModal.style.display = 'flex';
+    invoiceModal.focus();
+  }
+
+  closeInvoiceBtn.onclick = () => {
+    invoiceModal.style.display = 'none';
+  };
+
+  invoiceModal.onclick = e => {
+    if (e.target === invoiceModal) {
+      invoiceModal.style.display = 'none';
+    }
+  };
+
+  printInvoiceBtn.onclick = () => {
+    const printContent = document.getElementById('invoiceContent').innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+
+    renderOrders(searchInput.value);
+  };
+
+  searchInput.oninput = e => {
+    renderOrders(e.target.value);
+  };
+
+  fetchOrders();
 </script>
-
 
 </body>
 </html>
