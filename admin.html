@@ -296,71 +296,58 @@
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
-    body {
-      padding: 15px 10px;
-    }
+@media (max-width: 768px) {
+  /* ... */
 
-    #searchInput {
-      max-width: 100%;
-      font-size: 1.1rem;
-    }
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* للسماح بالتمرير الأفقي */
+    border-radius: 10px;
+    white-space: nowrap; /* منع التفاف النص داخل الخلايا */
+  }
 
-    .section {
-      max-width: 100%;
-      padding: 15px 10px 25px;
-    }
+  thead tr, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: auto; /* السماح بتوزيع عرض الأعمدة تلقائياً */
+  }
 
-    table {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      border-radius: 10px;
-    }
+  tbody td {
+    font-size: 0.9rem;
+    padding: 12px 10px;
+  }
 
-    thead tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
+  tbody td img {
+    width: 50px;
+    height: 50px;
+  }
 
-    tbody tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-      margin-bottom: 10px;
-    }
+  /* أزرار وقوائم منسدلة */
+  select.status-select,
+  button.delete-btn,
+  button.invoice-btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    min-width: auto;
+  }
 
-    tbody td {
-      font-size: 0.9rem;
-      padding: 12px 10px;
-    }
+  button.delete-btn {
+    margin-left: 6px;
+  }
 
-    tbody td img {
-      width: 50px;
-      height: 50px;
-    }
+  /* مودال الفاتورة */
+  #invoiceContent {
+    width: 95%;
+    max-width: none;
+    max-height: 90vh;
+    padding: 20px 15px;
+    overflow-y: auto;
+  }
 
-    select.status-select,
-    button.delete-btn,
-    button.invoice-btn {
-      font-size: 0.9rem;
-      padding: 8px 12px;
-      min-width: auto;
-    }
+  /* ... باقي الكود */
+}
 
-    button.delete-btn {
-      margin-left: 6px;
-    }
-
-    /* مودال */
-    #invoiceContent {
-      width: 95%;
-      max-width: none;
-      max-height: 90vh;
-      padding: 20px 15px;
-      overflow-y: auto;
-    }
 
     #invoiceContent p {
       font-size: 1rem;
@@ -377,7 +364,7 @@
       top: 10px;
       left: 10px;
     }
-  }
+
 </style>
 
 <!-- Firebase -->
