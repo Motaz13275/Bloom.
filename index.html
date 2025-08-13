@@ -391,47 +391,84 @@
 
   </main>
 
-  <!-- مودال الطلب -->
-  <div id="productModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <div class="modal-left">
-        <img id="modalImg" src="" alt="منتج" />
-      </div>
-      <div class="modal-right">
-        <h3>أدخل بياناتك لإتمام الطلب</h3>
-        <form id="orderForm">
-          <div class="form-group">
-            <i class="fas fa-user"></i>
-            <input type="text" id="fname" placeholder="الاسم الأول" required />
-          </div>
-          <div class="form-group">
-            <i class="fas fa-user"></i>
-            <input type="text" id="lname" placeholder="الاسم الثاني" required />
-          </div>
-          <div class="form-group">
-            <i class="fas fa-phone"></i>
-            <input type="tel" id="phone" placeholder="رقم الهاتف" required />
-          </div>
-          <div class="form-group">
-            <i class="fas fa-envelope"></i>
-            <input type="email" id="email" placeholder="البريد الإلكتروني" required />
-          </div>
-          <div class="form-group">
-            <i class="fas fa-tshirt"></i>
-            <select id="size" required>
-              <option value="">-- اختر المقاس --</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-            </select>
-          </div>
-          <button type="submit">تأكيد الطلب</button>
-          <div id="orderStatusMessage" style="margin-top:1rem; text-align:center; font-weight:bold; display:none;"></div>
-        </form>
-      </div>
+<!-- مودال الطلب -->
+<div id="productModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <div class="modal-left">
+      <img id="modalImg" src="" alt="منتج" />
+    </div>
+    <div class="modal-right">
+      <h3>أدخل بياناتك لإتمام الطلب</h3>
+      <form id="orderForm">
+        <div class="form-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="fname" placeholder="الاسم الأول" required />
+        </div>
+        <div class="form-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="lname" placeholder="الاسم الثاني" required />
+        </div>
+        <div class="form-group">
+          <i class="fas fa-phone"></i>
+          <input type="tel" id="phone" placeholder="رقم الهاتف" required />
+        </div>
+        <div class="form-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+        </div>
+        <div class="form-group">
+          <i class="fas fa-tshirt"></i>
+          <select id="size" required>
+            <option value="">-- اختر المقاس --</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+        <button type="submit">تأكيد الطلب</button>
+      </form>
     </div>
   </div>
+</div>
+
+
+<!-- مودال نجاح الطلب -->
+<div id="orderSuccessModal" class="modal" style="display:none;">
+  <div class="modal-content" style="max-width: 400px; position: relative;">
+    <button id="closeSuccessModal" class="close-modal" style="
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      background: transparent;
+      border: none;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 1;
+      transition: color 0.3s ease;">&times;</button>
+
+    <div style="
+      font-family: 'Arial', sans-serif;
+      font-size: 20px;
+      color: #2c3e50;
+      text-align: center;
+      padding: 25px;
+      border: 3px solid #a3095b;
+      border-radius: 12px;
+      background-color: #eafaf1;
+      font-weight: bold;
+    ">
+      🎉 تم استلام طلبك بنجاح! 🎉<br />
+      شكراً جزيلاً على ثقتك في Bloom! 💖<br />
+      قريباً سيتواصل معك أحد فريقنا لتأكيد التفاصيل وترتيب الطلب 📞✨<br />
+      نتمنى لك يوماً مليئاً بالسعادة والحماس! 🌟
+    </div>
+  </div>
+</div>
+
+
 
   <footer>
     <div class="footer-content">
@@ -487,140 +524,143 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
 
-  <script>
-    // تهيئة EmailJS
-    (function() {
-      emailjs.init("tjJaJuiCQ4cmzexsI"); 
-    })();
+<script>
+  // تهيئة EmailJS
+  (function() {
+    emailjs.init("tjJaJuiCQ4cmzexsI"); 
+  })();
 
-    // تهيئة Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyAGrl2qkBSurSxmqywsMk-GmjpovfynL4U",
-      authDomain: "bloomadmin-ac2f8.firebaseapp.com",
-      projectId: "bloomadmin-ac2f8",
-      storageBucket: "bloomadmin-ac2f8.firebasestorage.app",
-      messagingSenderId: "242133671849",
-      appId: "1:242133671849:web:4cf8b47d7a63cdb7656eb8",
-      measurementId: "G-P29GEYBMD7"
-    };
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-    const db = firebase.firestore();
+  // تهيئة Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGrl2qkBSurSxmqywsMk-GmjpovfynL4U",
+    authDomain: "bloomadmin-ac2f8.firebaseapp.com",
+    projectId: "bloomadmin-ac2f8",
+    storageBucket: "bloomadmin-ac2f8.firebasestorage.app",
+    messagingSenderId: "242133671849",
+    appId: "1:242133671849:web:4cf8b47d7a63cdb7656eb8",
+    measurementId: "G-P29GEYBMD7"
+  };
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase.firestore();
 
-    // فتح المودال وعرض صورة المنتج المختارة
-    function openModal(element) {
-      document.getElementById("productModal").style.display = "flex";
-      document.getElementById("modalImg").src = element.querySelector("img").src;
+  // فتح المودال وعرض صورة المنتج المختارة
+  function openModal(element) {
+    document.getElementById("productModal").style.display = "flex";
+    document.getElementById("modalImg").src = element.querySelector("img").src;
+  }
+
+  // إغلاق المودال عند الضغط خارج المحتوى (خاص بمودال المنتج فقط)
+  window.addEventListener('click', function(e) {
+    const productModal = document.getElementById("productModal");
+    if (e.target === productModal) {
+      productModal.style.display = "none";
+
+      // إخفاء رسالة الحالة
+      const msgBox = document.getElementById("orderStatusMessage");
+      if (msgBox) msgBox.style.display = "none";
+
+      // إعادة تفعيل زر التأكيد
+      const submitBtn = document.querySelector("#orderForm button[type='submit']");
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "تأكيد الطلب";
+      }
+
+      // إعادة تعيين النموذج
+      document.getElementById("orderForm").reset();
+    }
+  });
+
+  // إرسال بيانات الطلب عبر EmailJS و حفظها في Firestore
+  document.getElementById("orderForm").onsubmit = function (e) {
+    e.preventDefault();
+
+    const fname = document.getElementById("fname").value.trim();
+    const lname = document.getElementById("lname").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const size = document.getElementById("size").value;
+    const imageSrc = document.getElementById("modalImg").src;
+
+    if (!fname || !lname || !phone || !email || !size) {
+      alert("يرجى تعبئة جميع الحقول.");
+      return;
     }
 
-    // إغلاق المودال عند الضغط خارج المحتوى
-    window.onclick = function (e) {
-      if (e.target.id === "productModal") {
-        document.getElementById("productModal").style.display = "none";
-        const msgBox = document.getElementById("orderStatusMessage");
-        if(msgBox) msgBox.style.display = "none"; // إخفاء رسالة الحالة عند الإغلاق
-        document.getElementById("orderForm").reset();
+    const submitBtn = document.querySelector("#orderForm button[type='submit']");
+    const msgBox = document.getElementById("orderStatusMessage");
 
-        // إعادة تفعيل زر التأكيد
-        const submitBtn = document.querySelector("#orderForm button[type='submit']");
-        if(submitBtn){
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = "تأكيد الطلب";
-        }
-      }
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner"></span> جاري الإرسال...`;
+
+    if (msgBox) {
+      msgBox.style.display = "none";
+      msgBox.innerHTML = "";
+    }
+
+    const templateParams = {
+      fname,
+      lname,
+      phone,
+      email,
+      size,
+      imageSrc,
     };
 
-    // إرسال بيانات الطلب عبر EmailJS و حفظها في Firestore
-    document.getElementById("orderForm").onsubmit = function (e) {
-      e.preventDefault();
+    emailjs.send("service_c6se8cn", "template_pez4m2g", templateParams)
+    .then(function(response) {
+      console.log("نجاح إرسال الرسالة", response);
 
-      const fname = document.getElementById("fname").value.trim();
-      const lname = document.getElementById("lname").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const size = document.getElementById("size").value;
-      const imageSrc = document.getElementById("modalImg").src;
-
-      if (!fname || !lname || !phone || !email || !size) {
-        alert("يرجى تعبئة جميع الحقول.");
-        return;
-      }
-
-      const submitBtn = document.querySelector("#orderForm button[type='submit']");
-      const msgBox = document.getElementById("orderStatusMessage");
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span class="spinner"></span> جاري الإرسال...`;
-
-      if (msgBox) {
-        msgBox.style.display = "none";
-        msgBox.innerHTML = "";
-      }
-
-      const templateParams = {
+      // حفظ الطلب في Firestore
+      db.collection("orders").add({
         fname,
         lname,
         phone,
         email,
         size,
         imageSrc,
+        date: new Date()
+      })
+      .then(() => {
+        console.log("تم حفظ الطلب في قاعدة البيانات");
+      })
+      .catch((error) => {
+        console.error("خطأ في حفظ الطلب:", error);
+      });
+
+      // عرض مودال النجاح
+      const successModal = document.getElementById("orderSuccessModal");
+      const closeBtn = document.getElementById("closeSuccessModal");
+
+      successModal.style.display = "flex";
+
+      // إغلاق المودال عند الضغط على زر الإغلاق
+      closeBtn.onclick = () => {
+        successModal.style.display = "none";
       };
 
-      emailjs.send("service_c6se8cn", "template_pez4m2g", templateParams)
-      .then(function(response) {
-        console.log("نجاح إرسال الرسالة", response);
-
-        // حفظ الطلب في Firestore
-        db.collection("orders").add({
-          fname,
-          lname,
-          phone,
-          email,
-          size,
-          imageSrc,
-          date: new Date()
-        })
-        .then(() => {
-          console.log("تم حفظ الطلب في قاعدة البيانات");
-        })
-        .catch((error) => {
-          console.error("خطأ في حفظ الطلب:", error);
-        });
-
-        if (msgBox) {
-          msgBox.style.display = "block";
-          msgBox.innerHTML = `
-            <div style="
-              font-family: 'Arial', sans-serif;
-              font-size: 18px;
-              color: #2c3e50;
-              text-align: center;
-              padding: 20px;
-              border: 2px solid #27ae60;
-              border-radius: 10px;
-              background-color: #eafaf1;">
-              🎉 <strong>تم استلام طلبك بنجاح!</strong> 🎉<br />
-              شكراً لك على ثقتك بنا 💖<br />
-              فريق Bloom يتمنى لك يوماً سعيداً ☀️🌸
-            </div>
-          `;
-        } else {
-          alert("تم إرسال طلبك بنجاح! شكراً لك.");
+      // إغلاق المودال عند الضغط خارج محتوى المودال
+      window.addEventListener('click', function(event) {
+        if (event.target === successModal) {
+          successModal.style.display = "none";
         }
-
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "تأكيد الطلب";
-        document.getElementById("orderForm").reset();
-
-      })
-      .catch(function(error) {
-        alert("حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
-        console.log("FAILED...", error);
-
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "تأكيد الطلب";
       });
-    };
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "تأكيد الطلب";
+      document.getElementById("orderForm").reset();
+
+    })
+    .catch(function(error) {
+      alert("حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
+      console.log("FAILED...", error);
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "تأكيد الطلب";
+    });
+  };
+</script>
 
     // روابط سياسة الخصوصية وشروط الاستخدام
     const privacyLink = document.getElementById("privacyLink");
