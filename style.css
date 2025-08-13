@@ -1,4 +1,6 @@
-/* الخطوط */
+/* ======================
+   الخطوط والاستايل العام
+======================= */
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Tajawal&display=swap");
 
 * {
@@ -32,7 +34,9 @@ body {
   }
 }
 
-/* الموجات */
+/* ======================
+   الموجات المتحركة
+======================= */
 .waves {
   position: fixed;
   bottom: 0;
@@ -45,7 +49,7 @@ body {
   animation: waveMove 10s linear infinite;
   z-index: 10;
   transform: translate3d(0, 0, 0);
-  pointer-events: none; /* عشان لا تأثر على التفاعل */
+  pointer-events: none; /* لا تؤثر على التفاعل */
 }
 
 .waves:nth-child(2) {
@@ -62,7 +66,6 @@ body {
   animation-direction: reverse;
 }
 
-/* حركة الموج */
 @keyframes waveMove {
   0% {
     transform: translateX(0);
@@ -75,39 +78,38 @@ body {
   }
 }
 
-
-
-
-
+/* ======================
+   الهيدر والتنقل
+======================= */
 header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* يخلي العناصر على طرفين */
-    align-items: center;
-    padding: 3vh;
-    height: max-content;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* العناصر على طرفين */
+  align-items: center;
+  padding: 3vh;
+  height: max-content;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: transparent;
 }
 
 .nav-links {
-    display: flex;
-    margin-left: 5vh; /* صار اللينكات عاليمين */
-    justify-content: flex-start;
-    width: 100%;
+  display: flex;
+  margin-left: 5vh; /* لينكات عاليمين */
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .logoname {
-    margin-right: 5vh;
-    font-family: "Poppins", serif;
-    color: #fff;
-    font-size: 2.5vh;
-    letter-spacing: 0.5vh;
-    font-weight: 600;
+  margin-right: 5vh;
+  font-family: "Poppins", serif;
+  color: #fff;
+  font-size: 2.5vh;
+  letter-spacing: 0.5vh;
+  font-weight: 600;
 }
-
 
 .nav-links a {
   color: #fff;
@@ -121,11 +123,14 @@ header {
   transform: scale(1.1);
 }
 
+/* ======================
+   المحتوى الرئيسي
+======================= */
 .container {
-  padding: 6rem 1.5rem 2rem; /* أخلي مساحة تحت الهيدر */
+  padding: 6rem 1.5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-   padding-top: 40vh; /* نزّل المحتوى 40vh من الأعلى */
+  padding-top: 40vh; /* نزّل المحتوى 40vh من الأعلى */
 }
 
 .intro {
@@ -136,7 +141,7 @@ header {
 .intro h1 {
   font-size: 3rem;
   margin-bottom: 0.7rem;
-   transform: translateY(-90px); /* ارفع العنوان 10 بكسل لفوق */
+  transform: translateY(-90px);
 }
 
 .intro p {
@@ -145,6 +150,9 @@ header {
   line-height: 1.5;
 }
 
+/* ======================
+   بطاقات الخدمات
+======================= */
 .services-cards {
   display: flex;
   justify-content: space-around;
@@ -186,6 +194,9 @@ header {
   line-height: 1.4;
 }
 
+/* ======================
+   شبكة المنتجات
+======================= */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -234,7 +245,9 @@ header {
   transform: scale(1.1);
 }
 
-/* النافذة المنبثقة */
+/* ======================
+   النافذة المنبثقة (مودال)
+======================= */
 .modal {
   display: none;
   position: fixed;
@@ -289,6 +302,7 @@ header {
   text-align: center;
 }
 
+/* فورم الطلب */
 .form-group {
   position: relative;
   margin-bottom: 1rem;
@@ -352,7 +366,9 @@ header {
   }
 }
 
-/* متجاوب */
+/* ======================
+   استجابات الموبايل
+======================= */
 @media (max-width: 900px) {
   .modal-content {
     flex-direction: column;
@@ -365,7 +381,6 @@ header {
   }
 }
 
-/* أصغر شاشات */
 @media (max-width: 480px) {
   header {
     padding: 1rem;
@@ -396,10 +411,7 @@ header {
   .products-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
-}
 
-
-@media (max-width: 480px) {
   .modal-content {
     width: 95%;
     padding: 1rem;
@@ -429,66 +441,9 @@ header {
   }
 }
 
-
-footer {
-  background: #21041b;
-  padding: 1rem 0;
-  text-align: center;
-  color: #bbb;
-  font-size: 0.9rem;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  z-index: 50;
-}
-
-.social-links {
-  margin-bottom: 0.5rem;
-}
-
-.social-links a {
-  color: #ddd;
-  margin: 0 0.5rem;
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-  color: #fff;
-  transform: scale(1.1);
-}
-
-.policy-text p {
-  margin: 0;
-  font-weight: 400;
-}
-
-
-
-/* دوران تحميل صغير داخل زر الإرسال */
-.spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid #fff;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 8px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-
-/* فوتر */
+/* ======================
+   الفوتر
+======================= */
 footer {
   background-color: #21041b;
   color: #fff;
@@ -554,7 +509,9 @@ footer {
   color: #fff;
 }
 
-/* مودال الشروط والسياسة */
+/* ======================
+   مودال الشروط والسياسة
+======================= */
 .modal.policy-modal {
   display: none;
   position: fixed;
@@ -601,5 +558,69 @@ footer {
   color: #d9a5e0;
 }
 
+/* ======================
+   دوران تحميل صغير داخل زر الإرسال
+======================= */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content.success-modal-content {
+  background: linear-gradient(to bottom right, #320a2a, #2a0628);
+  color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  font-size: 1.3rem;
+  box-shadow: 0 8px 30px rgba(95,1,95,0.8);
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #d9a5e0;
+}
