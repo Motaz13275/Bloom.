@@ -519,12 +519,23 @@
 
   <!-- سكربتات -->
 
+
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
 
 <script>
+  // حماية زر الادمن بكلمة سر
+  document.getElementById('hiddenAdminBtn').addEventListener('click', () => {
+    const password = prompt('يرجى إدخال كلمة السر لصفحة الأدمن:');
+    if (password === 'admin123') {
+      window.location.href = 'admin.html'; // عدل حسب مسار صفحة الأدمن عندك
+    } else if (password !== null) {
+      alert('كلمة السر غير صحيحة!');
+    }
+  });
+
   // تهيئة EmailJS
   (function() {
     emailjs.init("tjJaJuiCQ4cmzexsI"); 
@@ -661,6 +672,7 @@
     });
   };
 </script>
+
 
     // روابط سياسة الخصوصية وشروط الاستخدام
     const privacyLink = document.getElementById("privacyLink");
