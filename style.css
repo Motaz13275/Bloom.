@@ -540,22 +540,27 @@ footer {
   box-shadow: 0 8px 30px rgb(95 1 95 / 0.8);
 }
 
+/* زر إغلاق موحد لكل المودالات */
 .close-modal {
   position: absolute;
-  top: 10px;
-  left: 15px;
-  background: transparent;
+  top: -15px;   /* فوق المودال */
+  right: -15px; /* يمين المودال */
+  background: #a3095b;
   border: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #fff;
   cursor: pointer;
   font-weight: bold;
-  line-height: 1;
-  transition: color 0.3s ease;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  line-height: 35px;
+  text-align: center;
+  transition: background 0.3s ease;
 }
 
 .close-modal:hover {
-  color: #d9a5e0;
+  background: #7c0642;
 }
 
 /* ======================
@@ -578,7 +583,6 @@ footer {
     transform: rotate(360deg);
   }
 }
-
 
 .modal {
   display: none;
@@ -605,22 +609,4 @@ footer {
   position: relative;
   font-size: 1.3rem;
   box-shadow: 0 8px 30px rgba(95,1,95,0.8);
-}
-
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  line-height: 1;
-  transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-  color: #d9a5e0;
 }
