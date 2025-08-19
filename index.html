@@ -583,50 +583,49 @@
     }
   });
 
-  // إرسال بيانات الطلب عبر EmailJS و حفظها في Firestore
   document.getElementById("orderForm").onsubmit = function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const fname = document.getElementById("fname").value.trim();
-    const lname = document.getElementById("lname").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const size = document.getElementById("size").value;
-    const imageSrc = document.getElementById("modalImg").src;
+  const fname = document.getElementById("fname").value.trim();
+  const region = document.getElementById("region").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const size = document.getElementById("size").value;
+  const imageSrc = document.getElementById("modalImg").src;
 
-    if (!fname || !lname || !phone || !email || !size) {
-      alert("يرجى تعبئة جميع الحقول.");
-      return;
-    }
+  if (!fname || !region || !phone || !email || !size) {
+    alert("يرجى تعبئة جميع الحقول.");
+    return;
+  }
 
-    const submitBtn = document.querySelector("#orderForm button[type='submit']");
-    const msgBox = document.getElementById("orderStatusMessage");
+  const submitBtn = document.querySelector("#orderForm button[type='submit']");
+  const msgBox = document.getElementById("orderStatusMessage");
 
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span class="spinner"></span> جاري الإرسال...`;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = `<span class="spinner"></span> جاري الإرسال...`;
 
-    if (msgBox) {
-      msgBox.style.display = "none";
-      msgBox.innerHTML = "";
-    }
+  if (msgBox) {
+    msgBox.style.display = "none";
+    msgBox.innerHTML = "";
+  }
 
-    const templateParams = {
-      fname,
-      lname,
-      phone,
-      email,
-      size,
-      imageSrc,
-    };
+  const templateParams = {
+    fname,
+    region,
+    phone,
+    email,
+    size,
+    imageSrc,
+  };
 
-    emailjs.send("service_c6se8cn", "template_pez4m2g", templateParams)
+  emailjs.send("service_c6se8cn", "template_pez4m2g", templateParams)
     .then(function(response) {
       console.log("نجاح إرسال الرسالة", response);
 
       // حفظ الطلب في Firestore
       db.collection("orders").add({
         fname,
-        lname,
+        region,
         phone,
         email,
         size,
@@ -646,12 +645,10 @@
 
       successModal.style.display = "flex";
 
-      // إغلاق المودال عند الضغط على زر الإغلاق
       closeBtn.onclick = () => {
         successModal.style.display = "none";
       };
 
-      // إغلاق المودال عند الضغط خارج محتوى المودال
       window.addEventListener('click', function(event) {
         if (event.target === successModal) {
           successModal.style.display = "none";
@@ -670,7 +667,8 @@
       submitBtn.disabled = false;
       submitBtn.innerHTML = "تأكيد الطلب";
     });
-  };
+};
+
 </script>
 <script>
 
