@@ -610,3 +610,28 @@ footer {
   font-size: 1.3rem;
   box-shadow: 0 8px 30px rgba(95,1,95,0.8);
 }
+
+
+
+
+
+
+
+
+
+
+/* تحسين أيقونة السلة */
+#cartIcon {
+  color: #a3095b;
+  z-index: 1000;
+}
+
+#cartIcon:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+#cartIcon i {
+  pointer-events: auto;
+}
+
