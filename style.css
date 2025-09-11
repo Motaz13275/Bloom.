@@ -161,6 +161,9 @@ header {
   flex-wrap: wrap;
 }
 
+/* ======================
+   البطاقات والكروت
+======================= */
 .card {
   background: linear-gradient(to right bottom, #320a2a, #2a0628);
   padding: 2rem;
@@ -168,7 +171,7 @@ header {
   box-shadow: 0 0 15px 2px #5d084c;
   max-width: 300px;
   flex: 1 1 250px;
-  color: #fff;
+  color: #cac3c3;
   text-align: center;
   transition: transform 0.3s ease-in-out;
 }
@@ -199,10 +202,20 @@ header {
 ======================= */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   margin-bottom: 3rem;
+  justify-items: center; /* لتوسيط المنتجات أفقياً */
+  align-items: start;
+    padding: 0 4rem; /* هذا يضيف مسافة من اليمين واليسار */
 }
+
+.product {
+  width: 100%; /* لتملأ كل عمود */
+  max-width: 250px; /* أقصى عرض للكمبيوتر */
+  box-sizing: border-box;
+}
+
 
 .product {
   position: relative;
@@ -230,7 +243,7 @@ header {
   bottom: 10px;
   right: 10px;
   background: rgba(0, 0, 0, 0.6);
-  color: #fff;
+  color: #000000;
   font-weight: bold;
   font-size: 1.1rem;
   padding: 0.3rem 0.7rem;
@@ -246,35 +259,32 @@ header {
 }
 
 /* ======================
-   النافذة المنبثقة (مودال)
+   النوافذ المنبثقة (مودالات)
 ======================= */
 .modal {
   display: none;
   position: fixed;
-  top: 0;
+  z-index: 3000;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(3, 3, 3, 0.7);
   justify-content: center;
   align-items: center;
-  z-index: 2000;
 }
 
 .modal-content {
-  background: linear-gradient(
-    to bottom right,
-    rgba(64, 32, 77, 0.25),
-    rgba(0, 0, 0, 0.85)
-  );
-  color: white;
+  background: #741a5d;
+  color: #d4c7c7;
   padding: 2rem 3rem;
   border-radius: 1.5rem;
-  box-shadow: 0 8px 30px rgb(95 1 95);
   max-width: 700px;
   width: 90%;
   display: flex;
   gap: 2rem;
+  box-shadow: 0 8px 30px rgba(236, 236, 236, 0.8);
   animation: fadeInUp 0.4s ease-out;
 }
 
@@ -302,7 +312,9 @@ header {
   text-align: center;
 }
 
-/* فورم الطلب */
+/* ======================
+   فورم الطلب داخل المودال
+======================= */
 .form-group {
   position: relative;
   margin-bottom: 1rem;
@@ -313,7 +325,7 @@ header {
   top: 50%;
   right: 12px;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(252, 241, 241, 0.6);
   font-size: 1.2rem;
 }
 
@@ -322,9 +334,9 @@ header {
   width: 100%;
   padding: 0.8rem 2.5rem 0.8rem 1rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.08);
-  color: #f5f5f5;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(212, 194, 194, 0.08);
+  color: #c9bcbc;
   font-size: 1rem;
   transition: border-color 0.3s ease;
 }
@@ -332,7 +344,7 @@ header {
 #orderForm input:focus,
 #orderForm select:focus {
   outline: none;
-  border-color: #fff;
+  border-color: #f8efef;
   background: #21082a;
 }
 
@@ -342,103 +354,114 @@ header {
   border-radius: 1rem;
   border: none;
   background-color: #000;
-  color: #fff;
+  color: #a13838;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 0.3s;
   width: 100%;
 }
 
 #orderForm button:hover {
-  background-color: #ebebeb;
+  background-color: #ccc8c8;
   color: #000;
 }
 
-/* حركة دخول النموذج */
+/* دوران صغير داخل زر الإرسال */
+.spinner {
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ======================
-   استجابات الموبايل
+   مودال الشروط والسياسة
 ======================= */
-@media (max-width: 900px) {
-  .modal-content {
-    flex-direction: column;
-  }
-
-  .modal-left,
-  .modal-right {
-    width: 100%;
-    padding: 0;
-  }
+.modal.policy-modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 480px) {
-  header {
-    padding: 1rem;
-  }
+.modal-content.policy-modal-content {
+  background: linear-gradient(to bottom right, #320a2a, #2a0628);
+  color: #918484;
+  padding: 2rem 2.5rem;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+  font-size: 1rem;
+  line-height: 1.6;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(95,1,95,0.8);
+}
 
-  .nav-links a {
-    margin-left: 1rem;
-    font-size: 0.9rem;
-  }
+.close-modal {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #831951;
+  border: none;
+  font-size: 1.5rem;
+  color: #e6e6e6;
+  cursor: pointer;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  line-height: 35px;
+  text-align: center;
+  transition: 0.3s;
+}
 
-  .intro h1 {
-    font-size: 2rem;
-  }
+.close-modal:hover {
+  background: #7c0642;
+}
 
-  .intro p {
-    font-size: 1rem;
-  }
+/* ======================
+   مودال نجاح الطلب
+======================= */
+.modal-content.success-modal-content {
+  background: linear-gradient(to bottom right, #320a2a, #2a0628);
+  color: #f0eded;
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  font-size: 1.3rem;
+  box-shadow: 0 8px 30px rgba(95,1,95,0.8);
+}
 
-  .card {
-    max-width: 100%;
-  }
+/* ======================
+   أيقونة السلة
+======================= */
+#cartIcon {
+  color: #a3095b;
+  z-index: 1000;
+  transition: transform 0.2s;
+}
 
-  .services-cards {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+#cartIcon:hover {
+  transform: scale(1.1);
+}
 
-  .products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
-
-  .modal-content {
-    width: 95%;
-    padding: 1rem;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
-  .modal-left img {
-    max-height: 200px;
-    object-fit: contain;
-  }
-
-  .modal-right h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  #orderForm input,
-  #orderForm select {
-    padding: 0.6rem;
-    font-size: 0.9rem;
-  }
-
-  #orderForm button {
-    padding: 0.8rem;
-    font-size: 1rem;
-  }
+#cartIcon i {
+  pointer-events: auto;
 }
 
 /* ======================
@@ -446,14 +469,14 @@ header {
 ======================= */
 footer {
   background-color: #21041b;
-  color: #fff;
+  color: #bbb4b4;
   padding: 2rem 1.5rem;
   text-align: center;
   font-family: "Tajawal", sans-serif;
   position: relative;
   bottom: 0;
   width: 100%;
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.5);
   z-index: 100;
 }
 
@@ -470,7 +493,7 @@ footer {
 .contact-info a {
   color: #d9a5e0;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
 
 .contact-info a:hover {
@@ -485,7 +508,7 @@ footer {
   color: #fff;
   font-size: 1.8rem;
   margin: 0 10px;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
 
 .social-links a:hover {
@@ -501,8 +524,7 @@ footer {
   color: #ccc;
   text-decoration: none;
   margin: 0 8px;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
 
 .policy-links a:hover {
@@ -510,128 +532,24 @@ footer {
 }
 
 /* ======================
-   مودال الشروط والسياسة
+   استجابات الموبايل
 ======================= */
-.modal.policy-modal {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
+@media (max-width: 900px) {
+  .modal-content { flex-direction: column; }
+  .modal-left, .modal-right { width: 100%; padding: 0; }
 }
 
-.modal-content.policy-modal-content {
-  background: linear-gradient(to bottom right, #320a2a, #2a0628);
-  color: #fff;
-  padding: 2rem 2.5rem;
-  border-radius: 15px;
-  max-width: 600px;
-  width: 90%;
-  position: relative;
-  font-size: 1rem;
-  line-height: 1.6;
-  font-family: "Tajawal", sans-serif;
-  box-shadow: 0 8px 30px rgb(95 1 95 / 0.8);
+@media (max-width: 480px) {
+  header { padding: 1rem; }
+  .nav-links a { margin-left: 1rem; font-size: 0.9rem; }
+  .intro h1 { font-size: 2rem; }
+  .intro p { font-size: 1rem; }
+  .card { max-width: 100%; }
+  .services-cards { flex-direction: column; gap: 1.5rem; }
+  .products-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .modal-content { width: 95%; padding: 1rem; max-height: 90vh; overflow-y: auto; }
+  .modal-left img { max-height: 200px; object-fit: contain; }
+  .modal-right h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  #orderForm input, #orderForm select { padding: 0.6rem; font-size: 0.9rem; }
+  #orderForm button { padding: 0.8rem; font-size: 1rem; }
 }
-
-/* زر إغلاق موحد لكل المودالات */
-.close-modal {
-  position: absolute;
-  top: -15px;   /* فوق المودال */
-  right: -15px; /* يمين المودال */
-  background: #a3095b;
-  border: none;
-  font-size: 1.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  line-height: 35px;
-  text-align: center;
-  transition: background 0.3s ease;
-}
-
-.close-modal:hover {
-  background: #7c0642;
-}
-
-/* ======================
-   دوران تحميل صغير داخل زر الإرسال
-======================= */
-.spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid #fff;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 8px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content.success-modal-content {
-  background: linear-gradient(to bottom right, #320a2a, #2a0628);
-  color: #fff;
-  padding: 2rem 3rem;
-  border-radius: 15px;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-  font-size: 1.3rem;
-  box-shadow: 0 8px 30px rgba(95,1,95,0.8);
-}
-
-
-
-
-
-
-
-
-
-
-/* تحسين أيقونة السلة */
-#cartIcon {
-  color: #a3095b;
-  z-index: 1000;
-}
-
-#cartIcon:hover {
-  transform: scale(1.1);
-  transition: 0.2s;
-}
-
-#cartIcon i {
-  pointer-events: auto;
-}
-
