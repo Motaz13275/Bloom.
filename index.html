@@ -108,17 +108,48 @@
         text-align: right;
     ">الإجمالي: $0</div>
 
-    <button id="checkoutBtn" style="
-        padding: 12px 0;
-        background: #a3095b;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-    " onmouseover="this.style.background='#d22b8a'" onmouseout="this.style.background='#a3095b'">تأكيد الطلب</button>
+  
+    
+  <form id="orderForm">
+  <h3>أدخل بياناتك لإتمام الطلب</h3>
+  <div class="form-group">
+    <i class="fas fa-user"></i>
+    <input type="text" id="fname" placeholder="الاسم" required />
+  </div>
+  
+  <div class="form-group">
+    <i class="fas fa-map-marker-alt"></i>
+    <input type="text" id="region" placeholder="المحافظة / المنطقة" required />
+  </div>
+  <div class="form-group">
+    <i class="fas fa-phone"></i>
+    <input type="tel" id="phone" placeholder="رقم الهاتف" required />
+  </div>
+  <div class="form-group">
+    <i class="fas fa-envelope"></i>
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+  </div>
+  <div class="form-group">
+  <i class="fas fa-tshirt"></i>
+  <select id="size" required>
+    <option value="">-- اختر المقاس --</option>
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+</div>
+<input type="hidden" id="productImage" name="productImage" />
+<!-- داخل الفورم أضف الحقل المخفي -->
+<input type="hidden" id="productLink" name="productLink" />
+
+
+  
+  <button type="submit" id="checkoutBtn" style="padding:12px; background:#a3095b; color:#fff; border:none; border-radius:10px; width:100%; margin-top:10px; cursor:pointer;">
+    تأكيد الطلب ✅
+  </button>
+</form>
+
   </div>
 </div>
 
@@ -157,378 +188,16 @@
       </div>
     </section>
 
- <section class="products-grid">
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/Q.jpg" alt="منتج 1" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QW.jpg" alt="منتج 2" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWE.jpg" alt="منتج 3" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWER.jpg" alt="منتج 4" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERT.jpg" alt="منتج 5" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERTY.jpg" alt="منتج 6" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERTYU.jpg" alt="منتج 7" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERTYUIO.jpg" alt="منتج 8" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/A.jpg" alt="منتج 9" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERTY.jpg" alt="منتج 10" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERTYUIOP[.jpg" alt="منتج 11" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QWERTYUIOP.jpg" alt="منتج 12" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/QQ.jpg" alt="منتج 13" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/WW.jpg" alt="منتج 14" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/EE.jpg" alt="منتج 15" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/RR.jpg" alt="منتج 16" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/TT.jpg" alt="منتج 17" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/YY.jpg" alt="منتج 18" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/UU.jpg" alt="منتج 19" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/II.jpg" alt="منتج 20" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/OO.jpg" alt="منتج 21" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/PP.jpg" alt="منتج 22" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/]].jpg" alt="منتج 23" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/[[.jpg" alt="منتج 24" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/].jpg" alt="منتج 25" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][.jpg" alt="منتج 26" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][P.jpg" alt="منتج 27" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][PO.jpg" alt="منتج 28" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POI.jpg" alt="منتج 29" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIU.jpg" alt="منتج 30" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIUY.jpg" alt="منتج 31" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIUYT.jpg" alt="منتج 32" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIUYTR.jpg" alt="منتج 33" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIUYTRE.jpg" alt="منتج 34" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIUYTREW.jpg" alt="منتج 35" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/][POIUYTREWQ.jpg" alt="منتج 36" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/AS.jpg" alt="منتج 37" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/ASD.jpg" alt="منتج 38" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/ASDF.jpg" alt="منتج 39" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-    <img src="New folder/ASDFG.jpg" alt="منتج 40" />
-    <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-  </div>
-  <div class="product" onclick="openModal(this)">
-  <img src="New folder/1.jpg" alt="منتج 41" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/2.jpg" alt="منتج 42" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/3.jpg" alt="منتج 43" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/4.jpg" alt="منتج 44" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/5.jpg" alt="منتج 45" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/6.jpg" alt="منتج 46" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/7.jpg" alt="منتج 47" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/8.jpg" alt="منتج 48" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/9.jpg" alt="منتج 49" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/10.jpg" alt="منتج 50" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/11.jpg" alt="منتج 51" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/12.jpg" alt="منتج 52" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/13.jpg" alt="منتج 53" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/14.jpg" alt="منتج 54" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/15.jpg" alt="منتج 55" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/16.jpg" alt="منتج 56" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/17.jpg" alt="منتج 57" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/18.jpg" alt="منتج 58" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/19.jpg" alt="منتج 59" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/20.jpg" alt="منتج 60" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/21.jpg" alt="منتج 61" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/22.png" alt="منتج 62" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/23.png" alt="منتج 63" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/24.png" alt="منتج 64" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/25.png" alt="منتج 65" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/26.png" alt="منتج 66" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/27.png" alt="منتج 67" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/28.png" alt="منتج 68" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/29.png" alt="منتج 69" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/30.png" alt="منتج 70" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/31.png" alt="منتج 71" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/32.png" alt="منتج 72" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/33.png" alt="منتج 73" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/34.png" alt="منتج 74" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/35.png" alt="منتج 75" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/36.png" alt="منتج 76" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-<div class="product" onclick="openModal(this)">
-  <img src="New folder/37.png" alt="منتج 77" />
-  <div class="price-tag"><i class="fa-solid fa-dollar-sign"></i> 10</div>
-</div>
-
-</section>
-
 
   </main>
 
-<!-- مودال الطلب -->
+<!-- مودال المنتج -->
 <div id="productModal" class="modal" style="display:none;">
-  <div class="modal-content">
-    <div class="modal-left">
-      <img id="modalImg" src="" alt="منتج" />
-    </div>
-    <div class="modal-right">
-      <h3>أدخل بياناتك لإتمام الطلب</h3>
-      <form id="orderForm">
-        <div class="form-group">
-          <i class="fas fa-user"></i>
-          <input type="text" id="fname" placeholder="الاسم " required />
-        </div>
-       <div class="form-group">
-  <i class="fas fa-map-marker-alt"></i>
-  <input type="text" id="region" placeholder="المحافظة / المنطقة" required />
-</div>
-        <div class="form-group">
-          <i class="fas fa-phone"></i>
-          <input type="tel" id="phone" placeholder="رقم الهاتف" required />
-        </div>
-        <div class="form-group">
-          <i class="fas fa-envelope"></i>
-          <input type="email" id="email" placeholder="البريد الإلكتروني" required />
-        </div>
-        <div class="form-group">
-          <i class="fas fa-tshirt"></i>
-          <select id="size" required>
-            <option value="">-- اختر المقاس --</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
-        </div>
-        <!-- أزرار الطلب داخل مودال المنتج -->
-<div style="display:flex; gap:10px; margin-top:15px;">
-  <button id="addToCartBtn" style="flex:1; padding:10px; background:#a3095b; color:#fff; border:none; border-radius:8px; cursor:pointer;">
-    إضافة إلى السلة 🛒
-  </button>
-  <button type="submit" style="flex:1; padding:10px; background:#2c3e50; color:#fff; border:none; border-radius:8px; cursor:pointer;">
-    تأكيد الطلب ✅
-  </button>
-</div>
-
-        <button type="submit">تأكيد الطلب</button>
-      </form>
-    </div>
+  <div class="modal-content" style="display:flex; flex-direction:column; align-items:center; gap:15px;">
+    <img id="modalImg" src="" alt="منتج" style="width:80%; border-radius:12px;" />
+    <button id="addToCartBtn" style="padding:10px; background:#a3095b; color:#fff; border:none; border-radius:8px; cursor:pointer; width:100%;">
+      إضافة إلى السلة 🛒
+    </button>
   </div>
 </div>
 
@@ -568,6 +237,9 @@
     </div>
   </div>
 </div>
+
+<div id="productsGrid" class="products-grid"></div>
+
 
 
 
@@ -628,233 +300,271 @@
 
 
 
-
-
-
-
-
-
-
+  
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-// --- تهيئة EmailJS ---
-emailjs.init('tjJaJuiCQ4cmzexsI'); // User ID / Public Key
+  // --- تهيئة EmailJS ---
+  emailjs.init("tjJaJuiCQ4cmzexsI");
 
-// --- إدارة السلة ---
-let cart = JSON.parse(localStorage.getItem("bloomCart")) || [];
+  const products = [
+  { name: "منتج 1", price: 10, img: "https://i.postimg.cc/hjhWWdKp/image.jpg" },
+  { name: "منتج 2", price: 10, img: "https://i.postimg.cc/3xK3fW0b/1.jpg" },
+  { name: "منتج 3", price: 10, img: "https://i.postimg.cc/02CsSxXG/10.jpg" },
+  { name: "منتج 4", price: 10, img: "https://i.postimg.cc/02vvrrn2/11.jpg" },
+  { name: "منتج 5", price: 10, img: "https://i.postimg.cc/52NMqGDh/12.jpg" },
+  { name: "منتج 6", price: 10, img: "https://i.postimg.cc/Z57zfHSC/13.jpg" },
+  { name: "منتج 7", price: 10, img: "https://i.postimg.cc/bvZc4nyL/14.jpg" },
+  { name: "منتج 8", price: 10, img: "https://i.postimg.cc/Ss80xpzM/15.jpg" },
+  { name: "منتج 9", price: 10, img: "https://i.postimg.cc/8CxQGCsG/16.jpg" },
+  { name: "منتج 10", price: 10, img: "https://i.postimg.cc/Xq0RZDwD/17.jpg" },
+  { name: "منتج 11", price: 10, img: "https://i.postimg.cc/D0dt1d6f/18.jpg" },
+  { name: "منتج 12", price: 10, img: "https://i.postimg.cc/66rJstKs/19.jpg" },
+  { name: "منتج 13", price: 10, img: "https://i.postimg.cc/Kv7Z5tjM/2.jpg" },
+  { name: "منتج 14", price: 10, img: "https://i.postimg.cc/dtJMwpQh/20.jpg" },
+  { name: "منتج 15", price: 10, img: "https://i.postimg.cc/m2jvDjh8/21.jpg" },
+  { name: "منتج 16", price: 10, img: "https://i.postimg.cc/zGf9Rhg5/22.png" },
+  { name: "منتج 17", price: 10, img: "https://i.postimg.cc/YCyTNS6F/23.png" },
+  { name: "منتج 18", price: 10, img: "https://i.postimg.cc/0NMFVqnB/24.png" },
+  { name: "منتج 19", price: 10, img: "https://i.postimg.cc/vmJjjSSH/25.png" },
+  { name: "منتج 20", price: 10, img: "https://i.postimg.cc/xCL7SyWG/26.png" },
+  { name: "منتج 21", price: 10, img: "https://i.postimg.cc/RCQ8sd14/27.png" },
+  { name: "منتج 22", price: 10, img: "https://i.postimg.cc/SRrvnQQJ/28.png" },
+  { name: "منتج 23", price: 10, img: "https://i.postimg.cc/vHYKpnX9/29.png" },
+  { name: "منتج 24", price: 10, img: "https://i.postimg.cc/y8vsMBF6/3.jpg" },
+  { name: "منتج 25", price: 10, img: "https://i.postimg.cc/YqdPkSyP/30.png" },
+  { name: "منتج 26", price: 10, img: "https://i.postimg.cc/Vk5VNcxk/31.png" },
+  { name: "منتج 27", price: 10, img: "https://i.postimg.cc/4xMF7SGb/32.png" },
+  { name: "منتج 28", price: 10, img: "https://i.postimg.cc/DzXpqPyV/33.png" },
+  { name: "منتج 29", price: 10, img: "https://i.postimg.cc/9MH81wrD/34.png" },
+  { name: "منتج 30", price: 10, img: "https://i.postimg.cc/nzKdWVD0/35.png" },
+  { name: "منتج 31", price: 10, img: "https://i.postimg.cc/RhMPxr19/36.png" },
+  { name: "منتج 32", price: 10, img: "https://i.postimg.cc/X71smzrS/37.png" },
+  { name: "منتج 33", price: 10, img: "https://i.postimg.cc/KYjxFVNP/4.jpg" },
+  { name: "منتج 34", price: 10, img: "https://i.postimg.cc/cJzZJm9V/5.jpg" },
+  { name: "منتج 35", price: 10, img: "https://i.postimg.cc/PJsjWqky/6.jpg" },
+  { name: "منتج 36", price: 10, img: "https://i.postimg.cc/85rGf6xs/7.jpg" },
+  { name: "منتج 37", price: 10, img: "https://i.postimg.cc/4y6TBTfg/8.jpg" },
+  { name: "منتج 38", price: 10, img: "https://i.postimg.cc/ZYpZT6rM/9.jpg" },
+  { name: "منتج 39", price: 10, img: "https://i.postimg.cc/qRYfkvR0/image.jpg" },
+  { name: "منتج 40", price: 10, img: "https://i.postimg.cc/m2gdds2y/A.jpg" },
+  { name: "منتج 41", price: 10, img: "https://i.postimg.cc/zDjtSB5f/AS.jpg" },
+  { name: "منتج 42", price: 10, img: "https://i.postimg.cc/NFpdgNbX/ASD.jpg" },
+  { name: "منتج 43", price: 10, img: "https://i.postimg.cc/t41BjN61/ASDF.jpg" },
+  { name: "منتج 44", price: 10, img: "https://i.postimg.cc/wjS0TR5w/ASDFG.jpg" },
+  { name: "منتج 45", price: 10, img: "https://i.postimg.cc/XvdxZNQ4/ASDFGH.jpg" },
+  { name: "منتج 46", price: 10, img: "https://i.postimg.cc/ydKj0qb9/D.jpg" },
+  { name: "منتج 47", price: 10, img: "https://i.postimg.cc/tTz55rKc/EE.jpg" },
+  { name: "منتج 48", price: 10, img: "https://i.postimg.cc/MKHD7mds/F.jpg" },
+  { name: "منتج 49", price: 10, img: "https://i.postimg.cc/1XCKx85c/G.jpg" },
+  { name: "منتج 50", price: 10, img: "https://i.postimg.cc/tJCzm3y4/H.jpg" },
+  { name: "منتج 51", price: 10, img: "https://i.postimg.cc/CMm7nQHB/II.jpg" },
+  { name: "منتج 52", price: 10, img: "https://i.postimg.cc/ht71wPFT/J.jpg" },
+  { name: "منتج 53", price: 10, img: "https://i.postimg.cc/Nfnxp2nQ/K.jpg" },
+  { name: "منتج 54", price: 10, img: "https://i.postimg.cc/ZqtxhtZg/L.jpg" },
+  { name: "منتج 55", price: 10, img: "https://i.postimg.cc/jjHQxgSj/OO.jpg" },
+  { name: "منتج 56", price: 10, img: "https://i.postimg.cc/j5R6LHD4/PP.jpg" },
+  { name: "منتج 57", price: 10, img: "https://i.postimg.cc/4ySpLjBW/Q.jpg" },
+  { name: "منتج 58", price: 10, img: "https://i.postimg.cc/j5vHNDN0/QQ.jpg" },
+  { name: "منتج 59", price: 10, img: "https://i.postimg.cc/sf6PgZs5/QW.jpg" },
+  { name: "منتج 60", price: 10, img: "https://i.postimg.cc/6q3dhBL7/QWE.jpg" },
+  { name: "منتج 61", price: 10, img: "https://i.postimg.cc/281Qb8SM/QWER.jpg" },
+  { name: "منتج 62", price: 10, img: "https://i.postimg.cc/W1r08Wr7/QWERT.jpg" },
+  { name: "منتج 63", price: 10, img: "https://i.postimg.cc/3Jzgg5yR/QWERTY.jpg" },
+  { name: "منتج 64", price: 10, img: "https://i.postimg.cc/q7Ty5sxH/QWERTYU.jpg" },
+  { name: "منتج 65", price: 10, img: "https://i.postimg.cc/mryCfPmz/QWERTYUI.jpg" },
+  { name: "منتج 66", price: 10, img: "https://i.postimg.cc/636R9BPH/QWERTYUIO.jpg" },
+  { name: "منتج 67", price: 10, img: "https://i.postimg.cc/LXyP5rKm/QWERTYUIOP.jpg" },
+  { name: "منتج 68", price: 10, img: "https://i.postimg.cc/wM7mm0gL/QWERTYUIOP.jpg" },
+  { name: "منتج 69", price: 10, img: "https://i.postimg.cc/kGztFKgZ/QWERTYUIOP.jpg" },
+  { name: "منتج 70", price: 10, img: "https://i.postimg.cc/T24m6MJ9/RR.jpg" },
+  { name: "منتج 71", price: 10, img: "https://i.postimg.cc/9Fw9X8xj/S.jpg" },
+  { name: "منتج 72", price: 10, img: "https://i.postimg.cc/Z5kdW8gv/SS.jpg" },
+  { name: "منتج 73", price: 10, img: "https://i.postimg.cc/HkQ7XJDZ/TT.jpg" },
+  { name: "منتج 74", price: 10, img: "https://i.postimg.cc/zf7b29fT/UU.jpg" },
+  { name: "منتج 75", price: 10, img: "https://i.postimg.cc/wBgRV696/WW.jpg" },
+  { name: "منتج 76", price: 10, img: "https://i.postimg.cc/C1KZ3mZX/YY.jpg" },
+  { name: "منتج 77", price: 10, img: "https://i.postimg.cc/nVyz2H16/image.jpg" },
+  { name: "منتج 78", price: 10, img: "https://i.postimg.cc/LhKr1QLb/image.jpg" },
+  { name: "منتج 79", price: 10, img: "https://i.postimg.cc/mkFvhWz9/image.jpg" },
+  { name: "منتج 80", price: 10, img: "https://i.postimg.cc/SNcKtwTj/P.jpg" },
+  { name: "منتج 81", price: 10, img: "https://i.postimg.cc/zDbvTLTC/PO.jpg" },
+  { name: "منتج 82", price: 10, img: "https://i.postimg.cc/htgGFp6s/POI.jpg" },
+  { name: "منتج 83", price: 10, img: "https://i.postimg.cc/Hk2kTbCg/POIU.jpg" },
+  { name: "منتج 84", price: 10, img: "https://i.postimg.cc/KzKG7V3G/POIUY.jpg" },
+  { name: "منتج 85", price: 10, img: "https://i.postimg.cc/25S8y3zB/POIUYT.jpg" },
+  { name: "منتج 86", price: 10, img: "https://i.postimg.cc/SK1QMqs1/POIUYTR.jpg" },
+  { name: "منتج 87", price: 10, img: "https://i.postimg.cc/hvTK6d0N/POIUYTRE.jpg" },
+  { name: "منتج 88", price: 10, img: "https://i.postimg.cc/FFLF7MQG/POIUYTREW.jpg" },
+  { name: "منتج 89", price: 10, img: "https://i.postimg.cc/0QL8Vf7p/POIUYTREWQ.jpg" },
+  { name: "منتج 90", price: 10, img: "https://i.postimg.cc/YqBrgdr7/image.jpg" }
+];
 
-// تحديث أيقونة السلة وعدد المنتجات
-function updateCartIcon() {
-  const cartCount = document.getElementById("cartCount");
-  if(cartCount) cartCount.textContent = cart.reduce((acc, item) => acc + item.qty, 0);
-  localStorage.setItem("bloomCart", JSON.stringify(cart));
-}
+  // --- إنشاء شبكة المنتجات وعرضها ---
+  const productsGrid = document.getElementById("productsGrid");
 
-// إضافة منتج للسلة
-function addToCart(img, name, price) {
-  const existing = cart.find(item => item.img === img);
-  if(existing){
-    existing.qty += 1;
-  } else {
-    cart.push({img, name, price, qty: 1});
-  }
-  updateCartIcon();
-  renderCart();
-}
-
-// رسم محتوى السلة
-function renderCart() {
-  const cartItems = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
-  if(!cartItems || !cartTotal) return;
-
-  cartItems.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    total += item.price * item.qty;
-
+  products.forEach((product) => {
     const div = document.createElement("div");
-    div.dataset.index = index;
-    div.style.display = "flex";
-    div.style.justifyContent = "space-between";
-    div.style.alignItems = "center";
-    div.style.background = "#f9f9f9";
-    div.style.padding = "10px";
-    div.style.borderRadius = "10px";
-    div.style.marginBottom = "12px";
-    div.style.gap = "15px";
+    div.className = "product";
+    div.style.cursor = "pointer";
 
     div.innerHTML = `
-      <div style="display:flex; align-items:center; gap:15px; flex:1;">
-        <img src="${item.img}" style="width:80px; height:80px; object-fit:cover; border-radius:10px;" />
-        <span style="font-size:1.1rem; font-weight:bold;">${item.name}</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <input type="number" min="1" value="${item.qty}" data-index="${index}" style="width:60px; text-align:center; border-radius:5px; border:1px solid #ccc; padding:2px;" />
-        <button data-index="${index}" class="removeItemBtn" style="background:red; color:#fff; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">×</button>
-      </div>
+      <img src="${product.img}" alt="${product.name}" />
+      <h3>${product.name}</h3>
+      <p>السعر: $${product.price}</p>
     `;
-    cartItems.appendChild(div);
-  });
 
-  cartTotal.textContent = `الإجمالي: $${total}`;
-  localStorage.setItem("bloomCart", JSON.stringify(cart));
-}
+    div.addEventListener("click", () => {
+      // تحديث صورة المودال
+     const modalImg = document.getElementById("modalImg");
+  if (modalImg) modalImg.src = product.img;
+  localStorage.setItem("lastClickedProductImg", product.img);
 
-// حذف المنتج أو تعديل الكمية
-document.getElementById("cartItems")?.addEventListener("click", (e) => {
-  if(e.target.classList.contains("removeItemBtn")){
-    const idx = parseInt(e.target.dataset.index);
-    cart.splice(idx, 1);
-    renderCart();
-    updateCartIcon();
-  }
-});
+      // تحديث الحقول المخفية
+  const hiddenImg = document.getElementById("productImage");
+  if (hiddenImg) hiddenImg.value = product.img;
 
-document.getElementById("cartItems")?.addEventListener("change", (e) => {
-  if(e.target.tagName === "INPUT"){
-    const idx = parseInt(e.target.dataset.index);
-    const val = parseInt(e.target.value);
-    if(val > 0){
-      cart[idx].qty = val;
-      renderCart();
-      updateCartIcon();
-    }
-  }
-});
-
-// فتح وإغلاق مودال السلة
-const cartIcon = document.getElementById("cartIcon");
-const cartModal = document.getElementById("cartModal");
-const closeCartModal = document.getElementById("closeCartModal");
-
-cartIcon?.addEventListener("click", () => {
-  renderCart();
-  cartModal.style.display = "flex";
-});
-
-closeCartModal?.addEventListener("click", () => {
-  cartModal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => { 
-  if(e.target === cartModal) cartModal.style.display = "none"; 
-});
-
-// فتح مودال المنتج عند الضغط عليه
-document.querySelectorAll(".product").forEach(prod => {
-  prod.addEventListener("click", () => {
-    const img = prod.querySelector("img").src;
-    document.getElementById("modalImg").src = img;
-    document.getElementById("productModal").style.display = "flex";
-  });
-});
-
-// زر إضافة المنتج للسلة
-document.getElementById("addToCartBtn")?.addEventListener("click", (e) => {
-  e.preventDefault();
-  const img = document.getElementById("modalImg").src;
-  const name = "منتج"; 
-  const price = 10;
-  addToCart(img, name, price);
-  alert("تم إضافة المنتج إلى السلة!");
-});
-
-// زر تأكيد الطلب – إرسال الإيميل عبر EmailJS
-document.getElementById("checkoutBtn")?.addEventListener("click", (e) => {
-  e.preventDefault();
-  if(cart.length === 0){
-    alert("سلتك فارغة!");
-    return;
-  }
-
-  let itemsList = cart.map(item => `${item.name} - الكمية: ${item.qty} - السعر: $${item.price}`).join("\n");
-  let total = cart.reduce((acc, item) => acc + item.qty * item.price, 0);
-  let templateParams = { message: `طلب جديد:\n${itemsList}\nالإجمالي: $${total}` };
-
-  emailjs.send('service_c6se8cn', 'template_pez4m2g', templateParams)
-    .then(() => {
-      alert("تم إرسال طلبك بنجاح!");
-      cart = [];
-      updateCartIcon();
-      renderCart();
-      cartModal.style.display = "none";
-    })
-    .catch(err => {
-      alert("حصل خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
-      console.error(err);
-    });
-});
-
-// تهيئة أيقونة السلة عند تحميل الصفحة
-updateCartIcon();
-</script>
+  const hiddenLink = document.getElementById("productLink");
+  if (hiddenLink) hiddenLink.value = window.location.href + "#" + product.name; // رابط المنتج
 
 
+      // فتح المودال
+      const productModal = document.getElementById("productModal");
+      if (productModal) productModal.style.display = "flex";
 
+      // تحديث الاسم والسعر داخل المودال
+      let modalName = document.getElementById("modalName");
+      let modalPrice = document.getElementById("modalPrice");
 
-
-<script>
-  // حماية زر الادمن بكلمة سر
-  document.getElementById('hiddenAdminBtn').addEventListener('click', () => {
-    const password = prompt('يرجى إدخال كلمة السر لصفحة الأدمن:');
-    if (password === 'admin123') {
-      window.location.href = 'admin.html'; // عدل حسب مسار صفحة الأدمن عندك
-    } else if (password !== null) {
-      alert('كلمة السر غير صحيحة!');
-    }
-  });
-
-  // تهيئة EmailJS
-  (function() {
-    emailjs.init("tjJaJuiCQ4cmzexsI"); 
-  })();
-
-  // تهيئة Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyAGrl2qkBSurSxmqywsMk-GmjpovfynL4U",
-    authDomain: "bloomadmin-ac2f8.firebaseapp.com",
-    projectId: "bloomadmin-ac2f8",
-    storageBucket: "bloomadmin-ac2f8.firebasestorage.app",
-    messagingSenderId: "242133671849",
-    appId: "1:242133671849:web:4cf8b47d7a63cdb7656eb8",
-    measurementId: "G-P29GEYBMD7"
-  };
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-  const db = firebase.firestore();
-
-  // فتح المودال وعرض صورة المنتج المختارة
-  function openModal(element) {
-    document.getElementById("productModal").style.display = "flex";
-    document.getElementById("modalImg").src = element.querySelector("img").src;
-  }
-
-  // إغلاق المودال عند الضغط خارج المحتوى (خاص بمودال المنتج فقط)
-  window.addEventListener('click', function(e) {
-    const productModal = document.getElementById("productModal");
-    if (e.target === productModal) {
-      productModal.style.display = "none";
-
-      // إخفاء رسالة الحالة
-      const msgBox = document.getElementById("orderStatusMessage");
-      if (msgBox) msgBox.style.display = "none";
-
-      // إعادة تفعيل زر التأكيد
-      const submitBtn = document.querySelector("#orderForm button[type='submit']");
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "تأكيد الطلب";
+      if (!modalName) {
+        modalName = document.createElement("h3");
+        modalName.id = "modalName";
+        modalName.style.color = "#fff";
+        modalName.style.margin = "10px 0 5px 0";
+        productModal.querySelector(".modal-content").prepend(modalName);
       }
+      modalName.textContent = product.name;
 
-      // إعادة تعيين النموذج
-      document.getElementById("orderForm").reset();
+      if (!modalPrice) {
+        modalPrice = document.createElement("p");
+        modalPrice.id = "modalPrice";
+        modalPrice.style.color = "#fff";
+        productModal.querySelector(".modal-content").append(modalPrice);
+      }
+      modalPrice.textContent = product.price;
+    });
+
+    productsGrid.appendChild(div);
+  });
+
+  // --- إدارة السلة ---
+  let cart = JSON.parse(localStorage.getItem("bloomCart")) || [];
+
+  function updateCartIcon() {
+    const cartCount = document.getElementById("cartCount");
+    if (cartCount) cartCount.textContent = cart.reduce((acc, item) => acc + item.qty, 0);
+    localStorage.setItem("bloomCart", JSON.stringify(cart));
+  }
+
+  function addToCart(img, name, price) {
+    const existing = cart.find(item => item.img === img);
+    if (existing) existing.qty += 1;
+    else cart.push({ img, name, price, qty: 1 });
+    updateCartIcon();
+    renderCart();
+  }
+
+  function renderCart() {
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    if (!cartItems || !cartTotal) return;
+
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price * item.qty;
+
+      const div = document.createElement("div");
+      div.dataset.index = index;
+      div.style.display = "flex";
+      div.style.justifyContent = "space-between";
+      div.style.alignItems = "center";
+      div.style.background = "#f9f9f9";
+      div.style.padding = "10px";
+      div.style.borderRadius = "10px";
+      div.style.marginBottom = "12px";
+      div.style.gap = "15px";
+
+      div.innerHTML = `
+        <div style="display:flex; align-items:center; gap:15px; flex:1;">
+          <img src="${item.img}" style="width:80px; height:80px; object-fit:cover; border-radius:10px;" />
+          <span style="font-size:1.1rem; font-weight:bold;">${item.name}</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <input type="number" min="1" value="${item.qty}" data-index="${index}" style="width:60px; text-align:center; border-radius:5px; border:1px solid #ccc; padding:2px;" />
+          <button data-index="${index}" class="removeItemBtn" style="background:red; color:#fff; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">×</button>
+        </div>
+      `;
+      cartItems.appendChild(div);
+    });
+
+    cartTotal.textContent = `الإجمالي: $${total}`;
+    localStorage.setItem("bloomCart", JSON.stringify(cart));
+  }
+
+  // --- أحداث السلة ---
+  document.getElementById("cartItems")?.addEventListener("click", (e) => {
+    if (e.target.classList.contains("removeItemBtn")) {
+      const idx = parseInt(e.target.dataset.index);
+      cart.splice(idx, 1);
+      renderCart();
+      updateCartIcon();
     }
   });
 
-  document.getElementById("orderForm").onsubmit = function (e) {
+  document.getElementById("cartItems")?.addEventListener("change", (e) => {
+    if (e.target.tagName === "INPUT") {
+      const idx = parseInt(e.target.dataset.index);
+      const val = parseInt(e.target.value);
+      if (val > 0) {
+        cart[idx].qty = val;
+        renderCart();
+        updateCartIcon();
+      }
+    }
+  });
+
+  // --- فتح وإغلاق مودال السلة ---
+  const cartIcon = document.getElementById("cartIcon");
+  const cartModal = document.getElementById("cartModal");
+  const closeCartModal = document.getElementById("closeCartModal");
+
+  cartIcon?.addEventListener("click", () => {
+    renderCart();
+    cartModal.style.display = "flex";
+  });
+
+  closeCartModal?.addEventListener("click", () => {
+    cartModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === cartModal) cartModal.style.display = "none";
+  });
+
+  // --- إضافة المنتج للسلة من مودال المنتج ---
+  document.getElementById("addToCartBtn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const img = document.getElementById("modalImg").src;
+    const name = document.getElementById("modalName").textContent;
+    const price = parseFloat(document.getElementById("modalPrice").textContent);
+    addToCart(img, name, price);
+    document.getElementById("productModal").style.display = "none";
+    alert("✅ تم إضافة المنتج إلى السلة!");
+  });
+
+  document.getElementById("checkoutBtn").addEventListener("click", (e) => {
   e.preventDefault();
 
   const fname = document.getElementById("fname").value.trim();
@@ -862,22 +572,11 @@ updateCartIcon();
   const phone = document.getElementById("phone").value.trim();
   const email = document.getElementById("email").value.trim();
   const size = document.getElementById("size").value;
-  const imageSrc = document.getElementById("modalImg").src;
+  const productImg = localStorage.getItem("lastClickedProductImg") || ""; // ← رابط الصورة
 
   if (!fname || !region || !phone || !email || !size) {
-    alert("يرجى تعبئة جميع الحقول.");
+    alert("يرجى تعبئة جميع الحقول واختيار المقاس.");
     return;
-  }
-
-  const submitBtn = document.querySelector("#orderForm button[type='submit']");
-  const msgBox = document.getElementById("orderStatusMessage");
-
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = `<span class="spinner"></span> جاري الإرسال...`;
-
-  if (msgBox) {
-    msgBox.style.display = "none";
-    msgBox.innerHTML = "";
   }
 
   const templateParams = {
@@ -886,131 +585,78 @@ updateCartIcon();
     phone,
     email,
     size,
-    imageSrc,
+      productLink, // ← الآن يترسل بالرابط
+    productImg, // ← إضافة رابط الصورة
   };
 
   emailjs.send("service_c6se8cn", "template_pez4m2g", templateParams)
-    .then(function(response) {
-      console.log("نجاح إرسال الرسالة", response);
-
-      // حفظ الطلب في Firestore
-      db.collection("orders").add({
-        fname,
-        region,
-        phone,
-        email,
-        size,
-        imageSrc,
-        date: new Date()
-      })
-      .then(() => {
-        console.log("تم حفظ الطلب في قاعدة البيانات");
-      })
-      .catch((error) => {
-        console.error("خطأ في حفظ الطلب:", error);
-      });
-
-      // عرض مودال النجاح
-      const successModal = document.getElementById("orderSuccessModal");
-      const closeBtn = document.getElementById("closeSuccessModal");
-
-      successModal.style.display = "flex";
-
-      closeBtn.onclick = () => {
-        successModal.style.display = "none";
-      };
-
-      window.addEventListener('click', function(event) {
-        if (event.target === successModal) {
-          successModal.style.display = "none";
-        }
-      });
-
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = "تأكيد الطلب";
+    .then(() => {
+      alert("✅ تم إرسال طلبك بنجاح!");
       document.getElementById("orderForm").reset();
-
     })
-    .catch(function(error) {
-      alert("حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
-      console.log("FAILED...", error);
-
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = "تأكيد الطلب";
+    .catch(err => {
+      console.error(err);
+      alert("حصل خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
     });
+});
+
+// --- Firebase Config ---
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
 };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// عند الضغط على تأكيد الطلب
+document.getElementById("checkoutBtn")?.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const fname = document.getElementById("fname").value.trim();
+  const region = document.getElementById("region").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const size = document.getElementById("size").value;
+  const productImg = localStorage.getItem("lastClickedProductImg") || "";
+  const productLink = document.getElementById("productLink")?.value || "";
+
+  if (!fname || !region || !phone || !email || !size) {
+    alert("يرجى تعبئة جميع الحقول واختيار المقاس.");
+    return;
+  }
+
+  const orderData = { fname, region, phone, email, size, productImg, productLink, timestamp: new Date() };
+
+  // حفظ الطلب في Firebase أولاً
+  db.collection("orders").add(orderData)
+    .then(() => {
+      console.log("✅ تم حفظ الطلب في لوحة الأدمن");
+
+      // ثم إرسال الطلب عبر EmailJS
+      return emailjs.send("service_c6se8cn", "template_pez4m2g", orderData);
+    })
+    .then(() => {
+      alert("✅ تم إرسال طلبك بنجاح!");
+      document.getElementById("orderForm").reset();
+      localStorage.removeItem("lastClickedProductImg");
+    })
+    .catch(err => {
+      console.error("❌ خطأ في إرسال الطلب: ", err);
+      alert("حصل خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
+    });
+});
+
+
+
+document.getElementById("hiddenAdminBtn").addEventListener("click", () => {
+  window.location.href = "admin.html"; // ← يفتح صفحة الأدمن
+});
+
 
 </script>
-<script>
 
-    // روابط سياسة الخصوصية وشروط الاستخدام
-    const privacyLink = document.getElementById("privacyLink");
-    const termsLink = document.getElementById("termsLink");
-    const policyModal = document.getElementById("policyModal");
-    const policyText = document.getElementById("policyText");
-    const closePolicyModal = document.getElementById("closePolicyModal");
 
-    const privacyPolicyContent = `
-      <h2>سياسة الخصوصية</h2>
-      <p>نحن في Bloom نلتزم بحماية خصوصيتك وأمان بياناتك الشخصية. عند استخدامك لموقعنا، فإنك توافق على جمع واستخدام المعلومات الشخصية التي تقدمها فقط لأغراض معالجة الطلبات وتحسين تجربتك معنا.</p>
-      <ul>
-        <li>لا نقوم بمشاركة معلوماتك مع أي جهات خارجية بدون موافقتك.</li>
-        <li>جميع بياناتك محفوظة بأمان ويتم التعامل معها بسرية تامة.</li>
-        <li>في حال وجود أي استفسار بخصوص بياناتك، يمكنك التواصل معنا عبر البريد الإلكتروني أو رقم الهاتف.</li>
-      </ul>
-      <p><strong>ملاحظة مهمة:</strong> نظراً لطبيعة منتجاتنا وخدماتنا، لا يُسمح بإرجاع أو ترجيع الطلبات بعد تأكيدها.</p>
-    `;
-
-    const termsOfUseContent = `
-      <h2>شروط الاستخدام</h2>
-      <p>نرحب بك في موقع Bloom ونرجو منك قراءة الشروط التالية بعناية قبل استخدام الموقع:</p>
-      <ul>
-        <li>باستخدام الموقع، فإنك توافق على الالتزام بالقوانين والتعليمات المتعلقة باستخدامه.</li>
-        <li>جميع المنتجات المعروضة هي للاستخدام الشخصي فقط ولا يُسمح بإعادة بيعها بدون إذن.</li>
-        <li>تحتفظ Bloom بالحق في تعديل أو تحديث هذه الشروط في أي وقت دون إشعار مسبق.</li>
-        <li>يجب تقديم معلومات صحيحة وكاملة عند تعبئة نموذج الطلب.</li>
-      </ul>
-      <p><strong>تنبيه:</strong> لا يُسمح بإرجاع أو ترجيع الطلبات بعد تأكيد الشراء، لذا يرجى التأكد جيداً قبل تقديم الطلب.</p>
-    `;
-
-    function openPolicyModal(content) {
-      policyText.innerHTML = content;
-      policyModal.style.display = "flex";
-    }
-
-    privacyLink.addEventListener("click", function(e) {
-      e.preventDefault();
-      openPolicyModal(privacyPolicyContent);
-    });
-
-    termsLink.addEventListener("click", function(e) {
-      e.preventDefault();
-      openPolicyModal(termsOfUseContent);
-    });
-
-    closePolicyModal.addEventListener("click", function() {
-      policyModal.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-      if (event.target === policyModal) {
-        policyModal.style.display = "none";
-      }
-    });
-
-    // زر مخفي للوصول للوحة التحكم
-    const hiddenBtn = document.getElementById('hiddenAdminBtn');
-    hiddenBtn.addEventListener('click', () => {
-      const password = prompt('أدخل كلمة المرور للوصول إلى لوحة التحكم:');
-      const correctPassword = 'admin123'; // غيّر كلمة السر هنا حسب ما تريد
-      if (password === correctPassword) {
-        window.location.href = 'admin.html'; // رابط صفحة لوحة التحكم
-      } else {
-        alert('كلمة المرور غير صحيحة!');
-      }
-    });
-
-  </script>
 
 </body>
 </html>
